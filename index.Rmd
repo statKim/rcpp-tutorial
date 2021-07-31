@@ -1,13 +1,13 @@
 --- 
-title: "A Minimal Book Example"
-author: "Yihui Xie"
+title: "Rcpp과 RcppEigen 튜토리얼"
+author: "김현성"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+description: "C++로 R 연산속도 높이기"
 ---
 
 # Prerequisites
