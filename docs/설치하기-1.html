@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Rcpp과 RcppEigen 튜토리얼</title>
+  <title>Chapter 2 설치하기 | Rcpp과 RcppEigen 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Rcpp과 RcppEigen 튜토리얼" />
+  <meta property="og:title" content="Chapter 2 설치하기 | Rcpp과 RcppEigen 튜토리얼" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Rcpp과 RcppEigen 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 2 설치하기 | Rcpp과 RcppEigen 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="설치하기.html"/>
-
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -119,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -136,16 +158,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Rcpp과 RcppEigen 튜토리얼</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>들어가며</a></li>
-<li class="chapter" data-level="1" data-path="설치하기.html"><a href="설치하기.html"><i class="fa fa-check"></i><b>1</b> 설치하기</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>들어가며</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="설치하기.html"><a href="설치하기.html#cc-컴파일러-설치"><i class="fa fa-check"></i><b>1.1</b> C/C++ 컴파일러 설치</a>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#설치하기"><i class="fa fa-check"></i>설치하기</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="설치하기.html"><a href="설치하기.html#windows"><i class="fa fa-check"></i><b>1.1.1</b> Windows</a></li>
-<li class="chapter" data-level="1.1.2" data-path="설치하기.html"><a href="설치하기.html#macos"><i class="fa fa-check"></i><b>1.1.2</b> MacOS</a></li>
-<li class="chapter" data-level="1.1.3" data-path="설치하기.html"><a href="설치하기.html#linux"><i class="fa fa-check"></i><b>1.1.3</b> Linux</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#c-컴파일러-설치"><i class="fa fa-check"></i>C++ 컴파일러 설치</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#패키지-설치"><i class="fa fa-check"></i>패키지 설치</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="설치하기.html"><a href="설치하기.html#패키지-설치"><i class="fa fa-check"></i><b>1.2</b> 패키지 설치</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="설치하기-1.html"><a href="설치하기-1.html"><i class="fa fa-check"></i><b>2</b> 설치하기</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="설치하기-1.html"><a href="설치하기-1.html#c-컴파일러-설치-1"><i class="fa fa-check"></i><b>2.1</b> C++ 컴파일러 설치</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="설치하기-1.html"><a href="설치하기-1.html#windows-1"><i class="fa fa-check"></i><b>2.1.1</b> Windows</a></li>
+<li class="chapter" data-level="2.1.2" data-path="설치하기-1.html"><a href="설치하기-1.html#mac-1"><i class="fa fa-check"></i><b>2.1.2</b> Mac</a></li>
+<li class="chapter" data-level="2.1.3" data-path="설치하기-1.html"><a href="설치하기-1.html#linux-1"><i class="fa fa-check"></i><b>2.1.3</b> Linux</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="설치하기-1.html"><a href="설치하기-1.html#패키지-설치-1"><i class="fa fa-check"></i><b>2.2</b> 패키지 설치</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -168,17 +198,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="설치하기-1" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> 설치하기</h1>
+<div id="c-컴파일러-설치-1" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> C++ 컴파일러 설치</h2>
+<div id="windows-1" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Windows</h3>
+<p>Windows에서는 Rtools의 설치가 필요하다.</p>
+</div>
+<div id="mac-1" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Mac</h3>
+</div>
+<div id="linux-1" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Linux</h3>
+</div>
+</div>
+<div id="패키지-설치-1" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> 패키지 설치</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="설치하기-1.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Rcpp&quot;</span>)</span></code></pre></div>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="설치하기.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

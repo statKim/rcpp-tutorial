@@ -1,10 +1,6 @@
-fig:nice-fig
-tab:nice-tab
-prerequisites
-intro
-literature
-methods
-applications
-example-one
-example-two
-final-words
+설치하기
+cc-컴파일러-설치
+windows
+macos
+linux
+패키지-설치
