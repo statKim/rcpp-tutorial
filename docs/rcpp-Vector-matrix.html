@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Rcpp 구조 | Rcpp과 RcppEigen 튜토리얼</title>
+  <title>Chapter 4 Vector와 Matrix | Rcpp과 RcppEigen 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Rcpp 구조 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta property="og:title" content="Chapter 4 Vector와 Matrix | Rcpp과 RcppEigen 튜토리얼" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Rcpp 구조 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 4 Vector와 Matrix | Rcpp과 RcppEigen 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="cpp-basic.html"/>
-<link rel="next" href="rcpp-Vector-matrix.html"/>
+<link rel="prev" href="rcpp-structure.html"/>
+<link rel="next" href="rcpp-list-dataframe.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -253,66 +253,124 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rcpp_structure" class="section level1" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Rcpp 구조</h1>
-<div id="rcpp-파일의-구조" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Rcpp 파일의 구조</h2>
-<p>Rstudio에서는 <code>File -&gt; New File -&gt; C++ File</code>을 선택하여 C++ 파일을 만들 수 있다.
-확장자는 <code>파일명.cpp</code>의 형태이며 기본으로 생성되는 파일은 다음과 같다.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="rcpp-structure.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
-<span id="cb14-2"><a href="rcpp-structure.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp;</span>
-<span id="cb14-3"><a href="rcpp-structure.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="rcpp-structure.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">// This is a simple example of exporting a C++ function to R. You can</span></span>
-<span id="cb14-5"><a href="rcpp-structure.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">// source this function into an R session using the Rcpp::sourceCpp </span></span>
-<span id="cb14-6"><a href="rcpp-structure.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">// function (or via the Source button on the editor toolbar). Learn</span></span>
-<span id="cb14-7"><a href="rcpp-structure.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">// more about Rcpp at:</span></span>
-<span id="cb14-8"><a href="rcpp-structure.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb14-9"><a href="rcpp-structure.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://www.rcpp.org/</span></span>
-<span id="cb14-10"><a href="rcpp-structure.html#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://adv-r.had.co.nz/Rcpp.html</span></span>
-<span id="cb14-11"><a href="rcpp-structure.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://gallery.rcpp.org/</span></span>
-<span id="cb14-12"><a href="rcpp-structure.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb14-13"><a href="rcpp-structure.html#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="rcpp-structure.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
-<span id="cb14-15"><a href="rcpp-structure.html#cb14-15" aria-hidden="true" tabindex="-1"></a>NumericVector timesTwo(NumericVector x) {</span>
-<span id="cb14-16"><a href="rcpp-structure.html#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x * <span class="dv">2</span>;</span>
-<span id="cb14-17"><a href="rcpp-structure.html#cb14-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-18"><a href="rcpp-structure.html#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="rcpp-structure.html#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-20"><a href="rcpp-structure.html#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">// You can include R code blocks in C++ files processed with sourceCpp</span></span>
-<span id="cb14-21"><a href="rcpp-structure.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">// (useful for testing and development). The R code will be automatically </span></span>
-<span id="cb14-22"><a href="rcpp-structure.html#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">// run after the compilation.</span></span>
-<span id="cb14-23"><a href="rcpp-structure.html#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb14-24"><a href="rcpp-structure.html#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-25"><a href="rcpp-structure.html#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">/*** R</span></span>
-<span id="cb14-26"><a href="rcpp-structure.html#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">timesTwo(42)</span></span>
-<span id="cb14-27"><a href="rcpp-structure.html#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+<div id="rcpp_Vector_matrix" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Vector와 Matrix</h1>
+<div id="데이터-타입" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> 데이터 타입</h2>
+<p>다음의 표에서 R과 Rcpp, C++의 Vector와 matrix에 해당하는 자료형을 비교하여 볼 수 있다.</p>
+<table style="width:100%;">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">자료형</th>
+<th align="center">R</th>
+<th align="center">Rcpp (Vector)</th>
+<th align="center">Rcpp (Matrix)</th>
+<th align="center">Rcpp (Scalar)</th>
+<th align="center">C++ (Scalar)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">정수형</td>
+<td align="center"><code>integer</code></td>
+<td align="center"><code>IntegerVector</code></td>
+<td align="center"><code>IntegerMatrix</code></td>
+<td align="center">-</td>
+<td align="center"><code>int</code></td>
+</tr>
+<tr class="even">
+<td align="center">실수형</td>
+<td align="center"><code>numeric</code></td>
+<td align="center"><code>NumericVector</code></td>
+<td align="center"><code>NumericMatrix</code></td>
+<td align="center">-</td>
+<td align="center"><code>double</code></td>
+</tr>
+<tr class="odd">
+<td align="center">문자열</td>
+<td align="center"><code>character</code></td>
+<td align="center"><code>CharacterVector</code> (<code>StringVector</code>)</td>
+<td align="center"><code>CharacterMatrix</code> (<code>StringMatrix</code>)</td>
+<td align="center"><code>String</code></td>
+<td align="center"><code>string</code></td>
+</tr>
+<tr class="even">
+<td align="center">논리형</td>
+<td align="center"><code>logical</code></td>
+<td align="center"><code>LogicalVector</code></td>
+<td align="center"><code>LogicalMatrix</code></td>
+<td align="center">-</td>
+<td align="center"><code>bool</code></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="구조-뜯어보기" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> 구조 뜯어보기</h2>
-<ul>
-<li><p>Rcpp을 사용하기 위한 라이브러리 로드</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="rcpp-structure.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span></code></pre></div></li>
-<li><p>namespace를 지정하여 앞에서 언급했던 <code>라이브러리명::함수명</code> 대신 <code>함수명</code>으로도 사용이 가능</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="rcpp-structure.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp;</span></code></pre></div></li>
-<li><p><code>//</code> : C++에서의 주석 기호</p></li>
-<li><p>C++ 함수 정의</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="rcpp-structure.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
-<span id="cb17-2"><a href="rcpp-structure.html#cb17-2" aria-hidden="true" tabindex="-1"></a>NumericVector timesTwo(NumericVector x) {</span>
-<span id="cb17-3"><a href="rcpp-structure.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x * <span class="dv">2</span>;</span>
-<span id="cb17-4"><a href="rcpp-structure.html#cb17-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<ul>
-<li><code>[[Rcpp::export]]</code>는 C++에서 정의한 함수를 R에서 사용할 수 있도록 해주는 구문</li>
-</ul></li>
-<li><p>C++에서 R을 실행해보는 청크(Chunk)</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="rcpp-structure.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*** R</span></span>
-<span id="cb18-2"><a href="rcpp-structure.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">timesTwo(42)</span></span>
-<span id="cb18-3"><a href="rcpp-structure.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
-<ul>
-<li>인터프리터 언어인 R과 달리 C++은 컴파일 언어이기 때문에, 파일 전체를 컴파일하며 오류가 있는지 체크한다.</li>
-<li>따라서 R처럼 한 줄씩 실행하며 코드에 오류가 있는지 확인하기 어려운데, 이 청크를 이용하여 컴파일과 동시에 함수가 잘 정의되었는지 확인할 수 있다.</li>
-</ul></li>
-</ul>
+<div id="vector" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Vector</h2>
+<p>설명의 편의를 위해 <code>using namespace Rcpp;</code>를 선언했다고 가정하자. (즉, <code>Rcpp::</code> 부분을 생략한다는 의미이다.)</p>
+<div id="vector-선언" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Vector 선언</h3>
+<p>다음과 같이 여러 방법으로 Vector를 생성할 수 있다.
+<code>NumericVector</code>뿐 아니라 다른 타입의 Vector도 동일한 방법으로 사용이 가능하다.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="rcpp-Vector-matrix.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 값을 지정하지 않고 자료형과 변수만 선언</span></span>
+<span id="cb19-2"><a href="rcpp-Vector-matrix.html#cb19-2" aria-hidden="true" tabindex="-1"></a>NumericVector a;</span>
+<span id="cb19-3"><a href="rcpp-Vector-matrix.html#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="rcpp-Vector-matrix.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">// a &lt;- rep(0, 3)</span></span>
+<span id="cb19-5"><a href="rcpp-Vector-matrix.html#cb19-5" aria-hidden="true" tabindex="-1"></a>NumericVector a(<span class="dv">3</span>);</span>
+<span id="cb19-6"><a href="rcpp-Vector-matrix.html#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="rcpp-Vector-matrix.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">// a &lt;- c(1,2,3)</span></span>
+<span id="cb19-8"><a href="rcpp-Vector-matrix.html#cb19-8" aria-hidden="true" tabindex="-1"></a>NumericVector a = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>};</span>
+<span id="cb19-9"><a href="rcpp-Vector-matrix.html#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="rcpp-Vector-matrix.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">// a &lt;- c(1,2,3)</span></span>
+<span id="cb19-11"><a href="rcpp-Vector-matrix.html#cb19-11" aria-hidden="true" tabindex="-1"></a>NumericVector a = NumericVector::create(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);</span></code></pre></div>
+</div>
+<div id="vector-값-접근" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Vector 값 접근</h3>
+<p>R과 달리 Vector의 인덱스는 0부터 시작한다. (이는 Python이나 다른 프로그래밍 언어에서도 마찬가지이다.)
+Vector의 인덱싱은 다음과 같이 할 수 있다.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="rcpp-Vector-matrix.html#cb20-1" aria-hidden="true" tabindex="-1"></a>NumericVector a = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>};</span>
+<span id="cb20-2"><a href="rcpp-Vector-matrix.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="rcpp-Vector-matrix.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a1 = a[<span class="dv">0</span>];   <span class="co">// 1을 a1에 저장</span></span>
+<span id="cb20-4"><a href="rcpp-Vector-matrix.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a3 = a[<span class="dv">2</span>];   <span class="co">// 3을 a3에 저장</span></span>
+<span id="cb20-5"><a href="rcpp-Vector-matrix.html#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="rcpp-Vector-matrix.html#cb20-6" aria-hidden="true" tabindex="-1"></a>NumericVector b = a[Rcpp::Range(<span class="dv">1</span>, <span class="dv">3</span>)];   <span class="co">// c(2,3,4)를 b에 저장</span></span></code></pre></div>
+<p>위와 같이 Vector의 인덱싱과 슬라이싱을 할 수 있지만, 슬라이싱이 아닌 경우의 Vector의 값을 여러개 가져오는 것은 불가능하다.
+즉, 위의 <code>a</code>라는 Vector에서 2와 5의 값만을 동시에 가져오는 방법은 불가능하다.</p>
+</div>
+<div id="멤버-함수메소드" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> 멤버 함수(메소드)</h3>
+<p>멤버 함수란 Vector object가 가지는 함수라고 생각하면 쉽다.
+사용방법은 <code>변수명.메소드명()</code>과 같이 사용할 수 있다.</p>
+<div id="length-size" class="section level4" number="4.2.3.1">
+<h4><span class="header-section-number">4.2.3.1</span> <code>length()</code>, <code>size()</code></h4>
+<p>Vector의 길이 확인</p>
+</div>
+<div id="sort" class="section level4" number="4.2.3.2">
+<h4><span class="header-section-number">4.2.3.2</span> <code>sort()</code></h4>
+<p>Vector를 오름차순으로 정렬</p>
+<p>더 다양한 멤버 함수에 대한 정보는 <a href="https://teuder.github.io/rcpp4everyone_en/080_vector.htm" class="uri">https://teuder.github.io/rcpp4everyone_en/080_vector.htm</a>를 참고하자.</p>
+</div>
+</div>
+</div>
+<div id="matrix" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Matrix</h2>
+<div id="matrix-선언" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Matrix 선언</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="rcpp-Vector-matrix.html#cb21-1" aria-hidden="true" tabindex="-1"></a>NumericMatrix A;</span></code></pre></div>
+</div>
+<div id="matrix-값-접근" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Matrix 값 접근</h3>
+<p>Vector와 마찬가지로 matrix에서도 인덱싱과 슬라이싱을 할 수 있지만, 연속적인 위치가 아닌 값들을 동시에 가져오는 것은 불가능하다.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -320,8 +378,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="cpp-basic.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rcpp-Vector-matrix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rcpp-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rcpp-list-dataframe.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
