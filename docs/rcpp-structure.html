@@ -119,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -171,6 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5.1" data-path="cpp-basic.html"><a href="cpp-basic.html#r에서의-while-문"><i class="fa fa-check"></i><b>2.5.1</b> R에서의 while 문</a></li>
 <li class="chapter" data-level="2.5.2" data-path="cpp-basic.html"><a href="cpp-basic.html#c에서의-while-문"><i class="fa fa-check"></i><b>2.5.2</b> C++에서의 while 문</a></li>
 </ul></li>
+<li class="chapter" data-level="2.6" data-path="cpp-basic.html"><a href="cpp-basic.html#함수"><i class="fa fa-check"></i><b>2.6</b> 함수</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="cpp-basic.html"><a href="cpp-basic.html#r에서의-함수-정의"><i class="fa fa-check"></i><b>2.6.1</b> R에서의 함수 정의</a></li>
+<li class="chapter" data-level="2.6.2" data-path="cpp-basic.html"><a href="cpp-basic.html#c에서의-함수-정의"><i class="fa fa-check"></i><b>2.6.2</b> C++에서의 함수 정의</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>I Rcpp</b></span></li>
 <li class="chapter" data-level="3" data-path="rcpp-structure.html"><a href="rcpp-structure.html"><i class="fa fa-check"></i><b>3</b> Rcpp 구조</a>
@@ -216,50 +243,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">3.1</span> Rcpp 파일의 구조</h2>
 <p>Rstudio에서는 <code>File -&gt; New File -&gt; C++ File</code>을 선택하여 C++ 파일을 만들 수 있다.
 확장자는 <code>파일명.cpp</code>의 형태이며 기본으로 생성되는 파일은 다음과 같다.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="rcpp-structure.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
-<span id="cb2-2"><a href="rcpp-structure.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp;</span>
-<span id="cb2-3"><a href="rcpp-structure.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="rcpp-structure.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// This is a simple example of exporting a C++ function to R. You can</span></span>
-<span id="cb2-5"><a href="rcpp-structure.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">// source this function into an R session using the Rcpp::sourceCpp </span></span>
-<span id="cb2-6"><a href="rcpp-structure.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">// function (or via the Source button on the editor toolbar). Learn</span></span>
-<span id="cb2-7"><a href="rcpp-structure.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">// more about Rcpp at:</span></span>
-<span id="cb2-8"><a href="rcpp-structure.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb2-9"><a href="rcpp-structure.html#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://www.rcpp.org/</span></span>
-<span id="cb2-10"><a href="rcpp-structure.html#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://adv-r.had.co.nz/Rcpp.html</span></span>
-<span id="cb2-11"><a href="rcpp-structure.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://gallery.rcpp.org/</span></span>
-<span id="cb2-12"><a href="rcpp-structure.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb2-13"><a href="rcpp-structure.html#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="rcpp-structure.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
-<span id="cb2-15"><a href="rcpp-structure.html#cb2-15" aria-hidden="true" tabindex="-1"></a>NumericVector timesTwo(NumericVector x) {</span>
-<span id="cb2-16"><a href="rcpp-structure.html#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x * <span class="dv">2</span>;</span>
-<span id="cb2-17"><a href="rcpp-structure.html#cb2-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-18"><a href="rcpp-structure.html#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="rcpp-structure.html#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="rcpp-structure.html#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">// You can include R code blocks in C++ files processed with sourceCpp</span></span>
-<span id="cb2-21"><a href="rcpp-structure.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">// (useful for testing and development). The R code will be automatically </span></span>
-<span id="cb2-22"><a href="rcpp-structure.html#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">// run after the compilation.</span></span>
-<span id="cb2-23"><a href="rcpp-structure.html#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
-<span id="cb2-24"><a href="rcpp-structure.html#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="rcpp-structure.html#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">/*** R</span></span>
-<span id="cb2-26"><a href="rcpp-structure.html#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">timesTwo(42)</span></span>
-<span id="cb2-27"><a href="rcpp-structure.html#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb14-1"><a href="rcpp-structure.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<span id="cb14-2"><a href="rcpp-structure.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp;</span>
+<span id="cb14-3"><a href="rcpp-structure.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="rcpp-structure.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">// This is a simple example of exporting a C++ function to R. You can</span></span>
+<span id="cb14-5"><a href="rcpp-structure.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">// source this function into an R session using the Rcpp::sourceCpp </span></span>
+<span id="cb14-6"><a href="rcpp-structure.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">// function (or via the Source button on the editor toolbar). Learn</span></span>
+<span id="cb14-7"><a href="rcpp-structure.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">// more about Rcpp at:</span></span>
+<span id="cb14-8"><a href="rcpp-structure.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-9"><a href="rcpp-structure.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://www.rcpp.org/</span></span>
+<span id="cb14-10"><a href="rcpp-structure.html#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://adv-r.had.co.nz/Rcpp.html</span></span>
+<span id="cb14-11"><a href="rcpp-structure.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">//   http://gallery.rcpp.org/</span></span>
+<span id="cb14-12"><a href="rcpp-structure.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-13"><a href="rcpp-structure.html#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="rcpp-structure.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb14-15"><a href="rcpp-structure.html#cb14-15" aria-hidden="true" tabindex="-1"></a>NumericVector timesTwo(NumericVector x) {</span>
+<span id="cb14-16"><a href="rcpp-structure.html#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x * <span class="dv">2</span>;</span>
+<span id="cb14-17"><a href="rcpp-structure.html#cb14-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-18"><a href="rcpp-structure.html#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="rcpp-structure.html#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="rcpp-structure.html#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="co">// You can include R code blocks in C++ files processed with sourceCpp</span></span>
+<span id="cb14-21"><a href="rcpp-structure.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">// (useful for testing and development). The R code will be automatically </span></span>
+<span id="cb14-22"><a href="rcpp-structure.html#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">// run after the compilation.</span></span>
+<span id="cb14-23"><a href="rcpp-structure.html#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">//</span></span>
+<span id="cb14-24"><a href="rcpp-structure.html#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="rcpp-structure.html#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">/*** R</span></span>
+<span id="cb14-26"><a href="rcpp-structure.html#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co">timesTwo(42)</span></span>
+<span id="cb14-27"><a href="rcpp-structure.html#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
 </div>
 <div id="구조-뜯어보기" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> 구조 뜯어보기</h2>
 <ul>
-<li><p><code>#include &lt;Rcpp.h&gt;</code> : Rcpp을 사용하기 위한 라이브러리 로드</p></li>
-<li><p><code>using namespace Rcpp;</code> : namespace를 지정하여 앞에서 언급했던 <code>라이브러리명::함수명</code> 대신 <code>함수명</code>으로도 사용이 가능</p></li>
+<li><p>Rcpp을 사용하기 위한 라이브러리 로드</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb15-1"><a href="rcpp-structure.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span></code></pre></div></li>
+<li><p>namespace를 지정하여 앞에서 언급했던 <code>라이브러리명::함수명</code> 대신 <code>함수명</code>으로도 사용이 가능</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="rcpp-structure.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp;</span></code></pre></div></li>
 <li><p><code>//</code> : C++에서의 주석 기호</p></li>
-<li><p><code>// [[Rcpp::export]]</code> : C++에서 정의한 함수를 R에서 사용할 수 있도록 해주는 구문</p></li>
 <li><p>C++ 함수 정의</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="rcpp-structure.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
-<span id="cb3-2"><a href="rcpp-structure.html#cb3-2" aria-hidden="true" tabindex="-1"></a>NumericVector timesTwo(NumericVector x) {</span>
-<span id="cb3-3"><a href="rcpp-structure.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x * <span class="dv">2</span>;</span>
-<span id="cb3-4"><a href="rcpp-structure.html#cb3-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div></li>
+<div class="sourceCode" id="cb17"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb17-1"><a href="rcpp-structure.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb17-2"><a href="rcpp-structure.html#cb17-2" aria-hidden="true" tabindex="-1"></a>NumericVector timesTwo(NumericVector x) {</span>
+<span id="cb17-3"><a href="rcpp-structure.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x * <span class="dv">2</span>;</span>
+<span id="cb17-4"><a href="rcpp-structure.html#cb17-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<ul>
+<li><code>[[Rcpp::export]]</code>는 C++에서 정의한 함수를 R에서 사용할 수 있도록 해주는 구문</li>
+</ul></li>
 <li><p>C++에서 R을 실행해보는 청크(Chunk)</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="rcpp-structure.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*** R</span></span>
-<span id="cb4-2"><a href="rcpp-structure.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">timesTwo(42)</span></span>
-<span id="cb4-3"><a href="rcpp-structure.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb18-1"><a href="rcpp-structure.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*** R</span></span>
+<span id="cb18-2"><a href="rcpp-structure.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">timesTwo(42)</span></span>
+<span id="cb18-3"><a href="rcpp-structure.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
 <ul>
 <li>인터프리터 언어인 R과 달리 C++은 컴파일 언어이기 때문에, 파일 전체를 컴파일하며 오류가 있는지 체크한다.</li>
 <li>따라서 R처럼 한 줄씩 실행하며 코드에 오류가 있는지 확인하기 어려운데, 이 청크를 이용하여 컴파일과 동시에 함수가 잘 정의되었는지 확인할 수 있다.</li>

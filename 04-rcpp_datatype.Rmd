@@ -1,4 +1,4 @@
-# Rcpp 자료형 {#rcpp_basic}
+# Rcpp 자료형 {#rcpp_datatype}
 
 ## Vector
 
