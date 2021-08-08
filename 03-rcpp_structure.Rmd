@@ -1,0 +1,75 @@
+# (PART) Rcpp {-}
+
+# Rcpp 구조 {#rcpp_structure}
+
+## Rcpp 파일의 구조
+
+Rstudio에서는 `File -> New File -> C++ File`을 선택하여 C++ 파일을 만들 수 있다.
+확장자는 `파일명.cpp`의 형태이며 기본으로 생성되는 파일은 다음과 같다.
+
+```cpp
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// This is a simple example of exporting a C++ function to R. You can
+// source this function into an R session using the Rcpp::sourceCpp 
+// function (or via the Source button on the editor toolbar). Learn
+// more about Rcpp at:
+//
+//   http://www.rcpp.org/
+//   http://adv-r.had.co.nz/Rcpp.html
+//   http://gallery.rcpp.org/
+//
+
+// [[Rcpp::export]]
+NumericVector timesTwo(NumericVector x) {
+  return x * 2;
+}
+
+
+// You can include R code blocks in C++ files processed with sourceCpp
+// (useful for testing and development). The R code will be automatically 
+// run after the compilation.
+//
+
+/*** R
+timesTwo(42)
+*/
+
+```
+
+
+## 구조 뜯어보기
+
+- Rcpp을 사용하기 위한 라이브러리 로드
+  ```CPP
+  #include <Rcpp.h>
+  ```
+
+- namespace를 지정하여 앞에서 언급했던 `라이브러리명::함수명` 대신 `함수명`으로도 사용이 가능
+  ```cpp
+  using namespace Rcpp;
+  ```
+
+- `//` : C++에서의 주석 기호
+
+- C++ 함수 정의
+  ```cpp
+  // [[Rcpp::export]]
+  NumericVector timesTwo(NumericVector x) {
+    return x * 2;
+  }
+  ```
+  - `// [[Rcpp::export]]`는 C++에서 정의한 함수를 R에서 사용할 수 있도록 해주는 구문
+  - C++에서는 함수를 정의할 때 
+
+- C++에서 R을 실행해보는 청크(Chunk)
+  ```cpp
+  /*** R
+  timesTwo(42)
+  */
+  ```
+  - 인터프리터 언어인 R과 달리 C++은 컴파일 언어이기 때문에, 파일 전체를 컴파일하며 오류가 있는지 체크한다.
+  - 따라서 R처럼 한 줄씩 실행하며 코드에 오류가 있는지 확인하기 어려운데, 이 청크를 이용하여 컴파일과 동시에 함수가 잘 정의되었는지 확인할 수 있다.
+
+

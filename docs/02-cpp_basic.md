@@ -5,6 +5,10 @@
 ```
 #include <RcppEigen.h>
 #include <Rcpp.h>
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
 ```
 
 
@@ -36,6 +40,7 @@ a = 100;
 R에서는 변수의 자료형을 지정해주지 않더라도 자동으로 자료형을 변환해주는 반면, C/C++에서는 자료형을 확실히 정해주어야 한다.^[위의 4가지 뿐 아니라 실수의 자릿수 등을 더 디테일하게 정할 수 있는 자료형들이 존재하며 이는 많은 블로그들에서 확인할 수 있다.]
 
 
+
 ## if 문
 
 ### R에서의 if 문
@@ -64,7 +69,6 @@ if (a < 5) {
 C++에서 print를 하기 위해서는 C++ 표준 템플릿 라이브러리(STL : Standard Template Library) 내의 `std::cout`을 이용해야 한다. (Rcpp 내의 `Rcpp::Rcout`을 이용해도 된다.)
 
 여기서 `라이브러리::함수`는 라이브러리 내의 함수에 접근한다는 의미로 R에서도 동일하게 사용되는 방법이다.
-R에서와 마찬가지로 라이브러리명을 제외하고 함수명으로만 사용하는 방법은 `Namespace`를 활용하는 방법이며 이는 [Rcpp 파일의 구조](#rcpp_structure) 에서 설명하겠다.
 
 
 ## for 문
@@ -103,26 +107,3 @@ while (n < 5) {
 }
 ```
 
-
-## 함수
-### R에서의 함수 정의
-```r
-# 두 실수의 합을 구하는 함수
-add <- function(a, b) {
-  val <- a + b
-  return(val)
-}
-```
-
-### C++에서의 함수 정의
-```cpp
-// 두 실수의 합을 구하는 함수
-double add(double a,
-           double b) {
-  double val = a + b;
-  return val;
-}
-```
-C++에서 함수를 정의할 때 유의해야할 점은 **input의 자료형과 output의 자료형을 반드시 명시**해주어야 한다는 것이다.
-아마 R 사용자에게 가장 익숙치 않은 부분일 것이고, 보통 여기서 에러가 매우 많이 발생한다.
-이 부분을 항상 주의하도록 하자!

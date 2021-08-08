@@ -1,0 +1,30 @@
+# 설치하기 {#install}
+
+## C/C++ 컴파일러 설치
+
+### Windows
+
+Windows에서는 C/C++ 컴파일을 위해 **Rtools**의 설치가 필요하다.
+<https://cran.r-project.org/bin/windows/Rtools/>에서 본인의 R 버전에 맞는 것을 설치해주면 된다.
+
+### MacOS
+
+MacOS에서는 **xcode**의 설치가 필요하다.
+프로그램이 다소 무거운 편이나, 앱스토어에서 간단히 설치할 수 있다.
+
+### Linux
+
+
+
+## 패키지 설치
+
+마지막으로 이제 R에서 아래의 패키지를 설치해주면 준비는 끝난다.
+
+
+```r
+# Rcpp 설치
+install.packages("Rcpp")
+
+# RcppEigen 설치
+install.packages("RcppEigen")
+```
