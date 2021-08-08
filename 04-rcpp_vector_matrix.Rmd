@@ -27,8 +27,7 @@ NumericVector a(3);
 
 // a <- c(1,2,3)
 NumericVector a = {1,2,3};
-
-// a <- c(1,2,3)
+// 또는
 NumericVector a = NumericVector::create(1,2,3);
 ```
 
@@ -47,18 +46,14 @@ NumericVector b = a[Rcpp::Range(1, 3)];   // c(2,3,4)를 b에 저장
 즉, 위의 `a`라는 Vector에서 2와 5의 값만을 동시에 가져오는 방법은 불가능하다.
 
 
-### 멤버 함수(메소드)
-멤버 함수란 Vector object가 가지는 함수라고 생각하면 쉽다.
-사용방법은 `변수명.메소드명()`과 같이 사용할 수 있다.
+### Vector 관련 함수
+`a`라는 Vector 타입의 변수가 있다고 가정하자.
 
-#### `length()`, `size()`
-Vector의 길이 확인
+#### `a.length()`, `a.size()`
+Vector `a`의 길이 반환
 
-#### `sort()`
-Vector를 오름차순으로 정렬
-
-
-더 다양한 멤버 함수에 대한 정보는 <https://teuder.github.io/rcpp4everyone_en/080_vector.htm>를 참고하자.
+#### `a.sort()`
+Vector `a`를 오름차순으로 정렬
 
 
 
@@ -66,10 +61,54 @@ Vector를 오름차순으로 정렬
 
 ### Matrix 선언
 ```cpp
+// 값을 지정하지 않고 자료형과 변수만 선언
 NumericMatrix A;
+
+// A1 <- matrix(0, nrow = 2, ncol = 2)
+NumericMatrix A1(2);
+
+// A2 <- matrix(0, nrow = 2, ncol = 3)
+NumericMatrix A2(2, 3);
 ```
 
 ### Matrix 값 접근
 Vector와 마찬가지로 matrix에서도 인덱싱과 슬라이싱을 할 수 있지만, 연속적인 위치가 아닌 값들을 동시에 가져오는 것은 불가능하다.
+다음의 코드를 확인해보자.
+```cpp
+NumericMatrix A(5, 5);
 
+// A[2, 3]
+double a11 = A(1, 2);
+
+// A[1, ]
+NumericVector row1 = A(0, _);
+// 또는
+NumericVector row1 = A.row(0);
+
+// A[, 2]
+NumericVector col1 = A(_, 1);
+// 또는
+NumericVector col1 = A.column(1);
+
+// A[1:2, 3:4]
+NumericMatrix B = A(Range(0, 1), Range(2, 3));
+```
+
+### Matrix 관련 함수
+`A`라는 Matrix 타입의 변수가 있다고 가정하자.
+
+#### `A.nrow()`, `A.rows()`
+Matrix `A`의 행 개수 반환
+
+#### `A.ncol()`, `A.cols()`
+Matrix `A`의 열 개수 반환
+
+#### `A.row(i)`
+Matrix `A`의 i번쨰 행 반환 (return 타입은 Vector)
+
+#### `A.col(j)`
+Matrix `A`의 j번쨰 열 반환 (return 타입은 Vector)
+
+#### `transpose(A)`
+Matrix `A`를 transpose한 Matrix 반환 (return 타입은 Matrix)
 

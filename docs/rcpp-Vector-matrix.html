@@ -212,19 +212,19 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="rcpp-Vector-matrix.html"><a href="rcpp-Vector-matrix.html#vector-선언"><i class="fa fa-check"></i><b>4.2.1</b> Vector 선언</a></li>
 <li class="chapter" data-level="4.2.2" data-path="rcpp-Vector-matrix.html"><a href="rcpp-Vector-matrix.html#vector-값-접근"><i class="fa fa-check"></i><b>4.2.2</b> Vector 값 접근</a></li>
-<li class="chapter" data-level="4.2.3" data-path="rcpp-Vector-matrix.html"><a href="rcpp-Vector-matrix.html#멤버-함수메소드"><i class="fa fa-check"></i><b>4.2.3</b> 멤버 함수(메소드)</a></li>
+<li class="chapter" data-level="4.2.3" data-path="rcpp-Vector-matrix.html"><a href="rcpp-Vector-matrix.html#vector-관련-함수"><i class="fa fa-check"></i><b>4.2.3</b> Vector 관련 함수</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="rcpp-Vector-matrix.html"><a href="rcpp-Vector-matrix.html#matrix"><i class="fa fa-check"></i><b>4.3</b> Matrix</a>
 <ul>
 <li class="chapter" data-level="4.3.1" data-path="rcpp-Vector-matrix.html"><a href="rcpp-Vector-matrix.html#matrix-선언"><i class="fa fa-check"></i><b>4.3.1</b> Matrix 선언</a></li>
 <li class="chapter" data-level="4.3.2" data-path="rcpp-Vector-matrix.html"><a href="rcpp-Vector-matrix.html#matrix-값-접근"><i class="fa fa-check"></i><b>4.3.2</b> Matrix 값 접근</a></li>
+<li class="chapter" data-level="4.3.3" data-path="rcpp-Vector-matrix.html"><a href="rcpp-Vector-matrix.html#matrix-관련-함수"><i class="fa fa-check"></i><b>4.3.3</b> Matrix 관련 함수</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="rcpp-list-dataframe.html"><a href="rcpp-list-dataframe.html"><i class="fa fa-check"></i><b>5</b> List와 DataFrame</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="rcpp-list-dataframe.html"><a href="rcpp-list-dataframe.html#데이터-타입-1"><i class="fa fa-check"></i><b>5.1</b> 데이터 타입</a></li>
-<li class="chapter" data-level="5.2" data-path="rcpp-list-dataframe.html"><a href="rcpp-list-dataframe.html#list"><i class="fa fa-check"></i><b>5.2</b> List</a></li>
-<li class="chapter" data-level="5.3" data-path="rcpp-list-dataframe.html"><a href="rcpp-list-dataframe.html#dataframe"><i class="fa fa-check"></i><b>5.3</b> DataFrame</a></li>
+<li class="chapter" data-level="5.1" data-path="rcpp-list-dataframe.html"><a href="rcpp-list-dataframe.html#list"><i class="fa fa-check"></i><b>5.1</b> List</a></li>
+<li class="chapter" data-level="5.2" data-path="rcpp-list-dataframe.html"><a href="rcpp-list-dataframe.html#dataframe"><i class="fa fa-check"></i><b>5.2</b> DataFrame</a></li>
 </ul></li>
 <li class="part"><span><b>II RcppEigen</b></span></li>
 <li class="chapter" data-level="6" data-path="eigen-basic.html"><a href="eigen-basic.html"><i class="fa fa-check"></i><b>6</b> Eigen 자료형</a>
@@ -328,9 +328,8 @@ div.csl-indent {
 <span id="cb19-6"><a href="rcpp-Vector-matrix.html#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="rcpp-Vector-matrix.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">// a &lt;- c(1,2,3)</span></span>
 <span id="cb19-8"><a href="rcpp-Vector-matrix.html#cb19-8" aria-hidden="true" tabindex="-1"></a>NumericVector a = {<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>};</span>
-<span id="cb19-9"><a href="rcpp-Vector-matrix.html#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="rcpp-Vector-matrix.html#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">// a &lt;- c(1,2,3)</span></span>
-<span id="cb19-11"><a href="rcpp-Vector-matrix.html#cb19-11" aria-hidden="true" tabindex="-1"></a>NumericVector a = NumericVector::create(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);</span></code></pre></div>
+<span id="cb19-9"><a href="rcpp-Vector-matrix.html#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">// 또는</span></span>
+<span id="cb19-10"><a href="rcpp-Vector-matrix.html#cb19-10" aria-hidden="true" tabindex="-1"></a>NumericVector a = NumericVector::create(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>);</span></code></pre></div>
 </div>
 <div id="vector-값-접근" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Vector 값 접근</h3>
@@ -345,18 +344,16 @@ Vector의 인덱싱은 다음과 같이 할 수 있다.</p>
 <p>위와 같이 Vector의 인덱싱과 슬라이싱을 할 수 있지만, 슬라이싱이 아닌 경우의 Vector의 값을 여러개 가져오는 것은 불가능하다.
 즉, 위의 <code>a</code>라는 Vector에서 2와 5의 값만을 동시에 가져오는 방법은 불가능하다.</p>
 </div>
-<div id="멤버-함수메소드" class="section level3" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> 멤버 함수(메소드)</h3>
-<p>멤버 함수란 Vector object가 가지는 함수라고 생각하면 쉽다.
-사용방법은 <code>변수명.메소드명()</code>과 같이 사용할 수 있다.</p>
-<div id="length-size" class="section level4" number="4.2.3.1">
-<h4><span class="header-section-number">4.2.3.1</span> <code>length()</code>, <code>size()</code></h4>
-<p>Vector의 길이 확인</p>
+<div id="vector-관련-함수" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Vector 관련 함수</h3>
+<p><code>a</code>라는 Vector 타입의 변수가 있다고 가정하자.</p>
+<div id="a.length-a.size" class="section level4" number="4.2.3.1">
+<h4><span class="header-section-number">4.2.3.1</span> <code>a.length()</code>, <code>a.size()</code></h4>
+<p>Vector <code>a</code>의 길이 반환</p>
 </div>
-<div id="sort" class="section level4" number="4.2.3.2">
-<h4><span class="header-section-number">4.2.3.2</span> <code>sort()</code></h4>
-<p>Vector를 오름차순으로 정렬</p>
-<p>더 다양한 멤버 함수에 대한 정보는 <a href="https://teuder.github.io/rcpp4everyone_en/080_vector.htm" class="uri">https://teuder.github.io/rcpp4everyone_en/080_vector.htm</a>를 참고하자.</p>
+<div id="a.sort" class="section level4" number="4.2.3.2">
+<h4><span class="header-section-number">4.2.3.2</span> <code>a.sort()</code></h4>
+<p>Vector <code>a</code>를 오름차순으로 정렬</p>
 </div>
 </div>
 </div>
@@ -364,12 +361,61 @@ Vector의 인덱싱은 다음과 같이 할 수 있다.</p>
 <h2><span class="header-section-number">4.3</span> Matrix</h2>
 <div id="matrix-선언" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Matrix 선언</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="rcpp-Vector-matrix.html#cb21-1" aria-hidden="true" tabindex="-1"></a>NumericMatrix A;</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="rcpp-Vector-matrix.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 값을 지정하지 않고 자료형과 변수만 선언</span></span>
+<span id="cb21-2"><a href="rcpp-Vector-matrix.html#cb21-2" aria-hidden="true" tabindex="-1"></a>NumericMatrix A;</span>
+<span id="cb21-3"><a href="rcpp-Vector-matrix.html#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="rcpp-Vector-matrix.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">// A1 &lt;- matrix(0, nrow = 2, ncol = 2)</span></span>
+<span id="cb21-5"><a href="rcpp-Vector-matrix.html#cb21-5" aria-hidden="true" tabindex="-1"></a>NumericMatrix A1(<span class="dv">2</span>);</span>
+<span id="cb21-6"><a href="rcpp-Vector-matrix.html#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="rcpp-Vector-matrix.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">// A2 &lt;- matrix(0, nrow = 2, ncol = 3)</span></span>
+<span id="cb21-8"><a href="rcpp-Vector-matrix.html#cb21-8" aria-hidden="true" tabindex="-1"></a>NumericMatrix A2(<span class="dv">2</span>, <span class="dv">3</span>);</span></code></pre></div>
 </div>
 <div id="matrix-값-접근" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Matrix 값 접근</h3>
-<p>Vector와 마찬가지로 matrix에서도 인덱싱과 슬라이싱을 할 수 있지만, 연속적인 위치가 아닌 값들을 동시에 가져오는 것은 불가능하다.</p>
+<p>Vector와 마찬가지로 matrix에서도 인덱싱과 슬라이싱을 할 수 있지만, 연속적인 위치가 아닌 값들을 동시에 가져오는 것은 불가능하다.
+다음의 코드를 확인해보자.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="rcpp-Vector-matrix.html#cb22-1" aria-hidden="true" tabindex="-1"></a>NumericMatrix A(<span class="dv">5</span>, <span class="dv">5</span>);</span>
+<span id="cb22-2"><a href="rcpp-Vector-matrix.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="rcpp-Vector-matrix.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">// A[2, 3]</span></span>
+<span id="cb22-4"><a href="rcpp-Vector-matrix.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a11 = A(<span class="dv">1</span>, <span class="dv">2</span>);</span>
+<span id="cb22-5"><a href="rcpp-Vector-matrix.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="rcpp-Vector-matrix.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">// A[1, ]</span></span>
+<span id="cb22-7"><a href="rcpp-Vector-matrix.html#cb22-7" aria-hidden="true" tabindex="-1"></a>NumericVector row1 = A(<span class="dv">0</span>, _);</span>
+<span id="cb22-8"><a href="rcpp-Vector-matrix.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">// 또는</span></span>
+<span id="cb22-9"><a href="rcpp-Vector-matrix.html#cb22-9" aria-hidden="true" tabindex="-1"></a>NumericVector row1 = A.row(<span class="dv">0</span>);</span>
+<span id="cb22-10"><a href="rcpp-Vector-matrix.html#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="rcpp-Vector-matrix.html#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">// A[, 2]</span></span>
+<span id="cb22-12"><a href="rcpp-Vector-matrix.html#cb22-12" aria-hidden="true" tabindex="-1"></a>NumericVector col1 = A(_, <span class="dv">1</span>);</span>
+<span id="cb22-13"><a href="rcpp-Vector-matrix.html#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">// 또는</span></span>
+<span id="cb22-14"><a href="rcpp-Vector-matrix.html#cb22-14" aria-hidden="true" tabindex="-1"></a>NumericVector col1 = A.column(<span class="dv">1</span>);</span>
+<span id="cb22-15"><a href="rcpp-Vector-matrix.html#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="rcpp-Vector-matrix.html#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co">// A[1:2, 3:4]</span></span>
+<span id="cb22-17"><a href="rcpp-Vector-matrix.html#cb22-17" aria-hidden="true" tabindex="-1"></a>NumericMatrix B = A(Range(<span class="dv">0</span>, <span class="dv">1</span>), Range(<span class="dv">2</span>, <span class="dv">3</span>));</span></code></pre></div>
+</div>
+<div id="matrix-관련-함수" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Matrix 관련 함수</h3>
+<p><code>A</code>라는 Matrix 타입의 변수가 있다고 가정하자.</p>
+<div id="a.nrow-a.rows" class="section level4" number="4.3.3.1">
+<h4><span class="header-section-number">4.3.3.1</span> <code>A.nrow()</code>, <code>A.rows()</code></h4>
+<p>Matrix <code>A</code>의 행 개수 반환</p>
+</div>
+<div id="a.ncol-a.cols" class="section level4" number="4.3.3.2">
+<h4><span class="header-section-number">4.3.3.2</span> <code>A.ncol()</code>, <code>A.cols()</code></h4>
+<p>Matrix <code>A</code>의 열 개수 반환</p>
+</div>
+<div id="a.rowi" class="section level4" number="4.3.3.3">
+<h4><span class="header-section-number">4.3.3.3</span> <code>A.row(i)</code></h4>
+<p>Matrix <code>A</code>의 i번쨰 행 반환 (return 타입은 Vector)</p>
+</div>
+<div id="a.colj" class="section level4" number="4.3.3.4">
+<h4><span class="header-section-number">4.3.3.4</span> <code>A.col(j)</code></h4>
+<p>Matrix <code>A</code>의 j번쨰 열 반환 (return 타입은 Vector)</p>
+</div>
+<div id="transposea" class="section level4" number="4.3.3.5">
+<h4><span class="header-section-number">4.3.3.5</span> <code>transpose(A)</code></h4>
+<p>Matrix <code>A</code>를 transpose한 Matrix 반환 (return 타입은 Matrix)</p>
 
+</div>
 </div>
 </div>
 </div>
