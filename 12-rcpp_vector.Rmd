@@ -1,0 +1,46 @@
+# Vector {#rcpp_vector}
+
+
+설명의 편의를 위해 `using namespace Rcpp;`를 선언했다고 가정하자. (즉, `Rcpp::` 부분을 생략한다는 의미이다.)
+
+## Vector 선언
+다음과 같이 여러 방법으로 Vector를 생성할 수 있다.
+`NumericVector`뿐 아니라 다른 타입의 Vector도 동일한 방법으로 사용이 가능하다.
+```cpp
+// 값을 지정하지 않고 자료형과 변수만 선언
+NumericVector a;
+
+// a <- rep(0, 3)
+NumericVector a(3);
+
+// a <- c(1,2,3)
+NumericVector a = {1,2,3};
+// 또는
+NumericVector a = NumericVector::create(1,2,3);
+```
+
+## Vector 값 접근
+R과 달리 Vector의 인덱스는 0부터 시작한다. (이는 Python이나 다른 프로그래밍 언어에서도 마찬가지이다.)
+Vector의 인덱싱은 다음과 같이 할 수 있다.
+```cpp
+NumericVector a = {1,2,3,4,5};
+
+double a1 = a[0];   // 1을 a1에 저장
+double a3 = a[2];   // 3을 a3에 저장
+
+NumericVector b = a[Rcpp::Range(1, 3)];   // c(2,3,4)를 b에 저장
+```
+위와 같이 Vector의 인덱싱과 슬라이싱을 할 수 있지만, 슬라이싱이 아닌 경우의 Vector의 값을 여러개 가져오는 것은 불가능하다.
+즉, 위의 `a`라는 Vector에서 2와 5의 값만을 동시에 가져오는 방법은 불가능하다.
+
+
+## Vector 관련 함수
+`a`라는 Vector 타입의 변수가 있다고 가정하자.
+
+### `a.length()`, `a.size()`
+Vector `a`의 길이 반환
+
+### `a.sort()`
+Vector `a`를 오름차순으로 정렬
+
+

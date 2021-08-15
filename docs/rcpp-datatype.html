@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼</title>
+  <title>Chapter 5 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta property="og:title" content="Chapter 5 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 5 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="김현성" />
 
 
-<meta name="date" content="2021-08-08" />
+<meta name="date" content="2021-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rcpp-structure.html"/>
-<link rel="next" href="eigen-basic.html"/>
+<link rel="prev" href="rcpp-source.html"/>
+<link rel="next" href="rcpp-vector.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -119,6 +119,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -183,23 +205,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="rcpp-structure.html"><a href="rcpp-structure.html#rcpp-파일의-구조"><i class="fa fa-check"></i><b>3.1</b> Rcpp 파일의 구조</a></li>
 <li class="chapter" data-level="3.2" data-path="rcpp-structure.html"><a href="rcpp-structure.html#구조-뜯어보기"><i class="fa fa-check"></i><b>3.2</b> 구조 뜯어보기</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html"><i class="fa fa-check"></i><b>4</b> Rcpp 자료형</a>
+<li class="chapter" data-level="4" data-path="rcpp-source.html"><a href="rcpp-source.html"><i class="fa fa-check"></i><b>4</b> Rcpp 실행</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#데이터-타입"><i class="fa fa-check"></i><b>4.1</b> 데이터 타입</a></li>
-<li class="chapter" data-level="4.2" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#vector"><i class="fa fa-check"></i><b>4.2</b> Vector</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#vector-선언"><i class="fa fa-check"></i><b>4.2.1</b> Vector 선언</a></li>
+<li class="chapter" data-level="4.1" data-path="rcpp-source.html"><a href="rcpp-source.html#sourcecpp"><i class="fa fa-check"></i><b>4.1</b> <code>sourceCpp()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#matrix"><i class="fa fa-check"></i><b>4.3</b> Matrix</a>
+<li class="chapter" data-level="5" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html"><i class="fa fa-check"></i><b>5</b> Rcpp 자료형</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#matrix-선언"><i class="fa fa-check"></i><b>4.3.1</b> Matrix 선언</a></li>
+<li class="chapter" data-level="5.1" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#데이터-타입"><i class="fa fa-check"></i><b>5.1</b> 데이터 타입</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="rcpp-vector.html"><a href="rcpp-vector.html"><i class="fa fa-check"></i><b>6</b> Vector</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="rcpp-vector.html"><a href="rcpp-vector.html#vector-선언"><i class="fa fa-check"></i><b>6.1</b> Vector 선언</a></li>
+<li class="chapter" data-level="6.2" data-path="rcpp-vector.html"><a href="rcpp-vector.html#vector-값-접근"><i class="fa fa-check"></i><b>6.2</b> Vector 값 접근</a></li>
+<li class="chapter" data-level="6.3" data-path="rcpp-vector.html"><a href="rcpp-vector.html#vector-관련-함수"><i class="fa fa-check"></i><b>6.3</b> Vector 관련 함수</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="rcpp-vector.html"><a href="rcpp-vector.html#a.length-a.size"><i class="fa fa-check"></i><b>6.3.1</b> <code>a.length()</code>, <code>a.size()</code></a></li>
+<li class="chapter" data-level="6.3.2" data-path="rcpp-vector.html"><a href="rcpp-vector.html#a.sort"><i class="fa fa-check"></i><b>6.3.2</b> <code>a.sort()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html"><i class="fa fa-check"></i><b>7</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#matrix-선언"><i class="fa fa-check"></i><b>7.1</b> Matrix 선언</a></li>
+<li class="chapter" data-level="7.2" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#matrix-값-접근"><i class="fa fa-check"></i><b>7.2</b> Matrix 값 접근</a></li>
+<li class="chapter" data-level="7.3" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#matrix-관련-함수"><i class="fa fa-check"></i><b>7.3</b> Matrix 관련 함수</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#a.nrow-a.rows"><i class="fa fa-check"></i><b>7.3.1</b> <code>A.nrow()</code>, <code>A.rows()</code></a></li>
+<li class="chapter" data-level="7.3.2" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#a.ncol-a.cols"><i class="fa fa-check"></i><b>7.3.2</b> <code>A.ncol()</code>, <code>A.cols()</code></a></li>
+<li class="chapter" data-level="7.3.3" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#a.rowi"><i class="fa fa-check"></i><b>7.3.3</b> <code>A.row(i)</code></a></li>
+<li class="chapter" data-level="7.3.4" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#a.colj"><i class="fa fa-check"></i><b>7.3.4</b> <code>A.col(j)</code></a></li>
+<li class="chapter" data-level="7.3.5" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#transposea"><i class="fa fa-check"></i><b>7.3.5</b> <code>transpose(A)</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="rcpp-list.html"><a href="rcpp-list.html"><i class="fa fa-check"></i><b>8</b> List</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="rcpp-list.html"><a href="rcpp-list.html#list"><i class="fa fa-check"></i><b>8.1</b> List</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rcpp-dataframe.html"><a href="rcpp-dataframe.html"><i class="fa fa-check"></i><b>9</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="rcpp-dataframe.html"><a href="rcpp-dataframe.html#dataframe"><i class="fa fa-check"></i><b>9.1</b> DataFrame</a></li>
 </ul></li>
 <li class="part"><span><b>II RcppEigen</b></span></li>
-<li class="chapter" data-level="5" data-path="eigen-basic.html"><a href="eigen-basic.html"><i class="fa fa-check"></i><b>5</b> Eigen 자료형</a>
+<li class="chapter" data-level="10" data-path="eigen-basic.html"><a href="eigen-basic.html"><i class="fa fa-check"></i><b>10</b> Eigen 자료형</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="eigen-basic.html"><a href="eigen-basic.html#vector-1"><i class="fa fa-check"></i><b>5.1</b> Vector</a></li>
-<li class="chapter" data-level="5.2" data-path="eigen-basic.html"><a href="eigen-basic.html#matrix-1"><i class="fa fa-check"></i><b>5.2</b> Matrix</a></li>
+<li class="chapter" data-level="10.1" data-path="eigen-basic.html"><a href="eigen-basic.html#vector"><i class="fa fa-check"></i><b>10.1</b> Vector</a></li>
+<li class="chapter" data-level="10.2" data-path="eigen-basic.html"><a href="eigen-basic.html#matrix"><i class="fa fa-check"></i><b>10.2</b> Matrix</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -222,10 +271,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rcpp_datatype" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Rcpp 자료형</h1>
-<div id="데이터-타입" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> 데이터 타입</h2>
+<div id="rcpp_datatype" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Rcpp 자료형</h1>
+<p>Rcpp은 Vector와 Matrix를 비롯해 List, DataFrame의 R과 비슷한 형태의 자료구조를 제공하고 있다.</p>
+<div id="데이터-타입" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> 데이터 타입</h2>
+<p>다음의 표에서 R과 Rcpp, C++의 Vector와 matrix에 해당하는 자료형을 비교하여 볼 수 있다.</p>
 <table style="width:100%;">
 <colgroup>
 <col width="16%" />
@@ -238,11 +289,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <thead>
 <tr class="header">
 <th align="center">자료형</th>
-<th align="center">R vector</th>
-<th align="center">Rcpp vector</th>
-<th align="center">Rcpp matrix</th>
-<th align="center">Rcpp scalar</th>
-<th align="center">C++ scalar</th>
+<th align="center">R</th>
+<th align="center">Rcpp (Vector)</th>
+<th align="center">Rcpp (Matrix)</th>
+<th align="center">Rcpp (Scalar)</th>
+<th align="center">C++ (Scalar)</th>
 </tr>
 </thead>
 <tbody>
@@ -280,31 +331,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-</div>
-<div id="vector" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Vector</h2>
-<div id="vector-선언" class="section level3" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Vector 선언</h3>
-</div>
-</div>
-<div id="matrix" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Matrix</h2>
-<div id="matrix-선언" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Matrix 선언</h3>
 
 </div>
 </div>
-</div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="rcpp-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eigen-basic.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rcpp-source.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rcpp-vector.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

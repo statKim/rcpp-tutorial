@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 C++ 기초 문법 | Rcpp과 RcppEigen 튜토리얼</title>
+  <title>Chapter 7 Matrix | Rcpp과 RcppEigen 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 C++ 기초 문법 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta property="og:title" content="Chapter 7 Matrix | Rcpp과 RcppEigen 튜토리얼" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 C++ 기초 문법 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 7 Matrix | Rcpp과 RcppEigen 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="install.html"/>
-<link rel="next" href="rcpp-structure.html"/>
+<link rel="prev" href="rcpp-vector.html"/>
+<link rel="next" href="rcpp-list.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -271,141 +271,74 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cpp_basic" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> C++ 기초 문법</h1>
-<div id="라이브러리-불러오기" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> 라이브러리 불러오기</h2>
-<p><code>#include &lt;라이브러리 이름&gt;</code>을 통해 C++ 라이브러리를 불러올 수 있다. R에서 <code>library(패키지명)</code>을 사용하는 것과 비슷하다.</p>
-<pre><code>#include &lt;RcppEigen.h&gt;
-#include &lt;Rcpp.h&gt;</code></pre>
+<div id="rcpp_matrix" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Matrix</h1>
+<div id="matrix-선언" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Matrix 선언</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="rcpp-matrix.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 값을 지정하지 않고 자료형과 변수만 선언</span></span>
+<span id="cb24-2"><a href="rcpp-matrix.html#cb24-2" aria-hidden="true" tabindex="-1"></a>NumericMatrix A;</span>
+<span id="cb24-3"><a href="rcpp-matrix.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="rcpp-matrix.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">// A1 &lt;- matrix(0, nrow = 2, ncol = 2)</span></span>
+<span id="cb24-5"><a href="rcpp-matrix.html#cb24-5" aria-hidden="true" tabindex="-1"></a>NumericMatrix A1(<span class="dv">2</span>);</span>
+<span id="cb24-6"><a href="rcpp-matrix.html#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="rcpp-matrix.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">// A2 &lt;- matrix(0, nrow = 2, ncol = 3)</span></span>
+<span id="cb24-8"><a href="rcpp-matrix.html#cb24-8" aria-hidden="true" tabindex="-1"></a>NumericMatrix A2(<span class="dv">2</span>, <span class="dv">3</span>);</span></code></pre></div>
 </div>
-<div id="변수선언" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> 변수선언</h2>
-<div id="r에서-변수선언" class="section level3" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> R에서 변수선언</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="cpp-basic.html#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span>       <span class="co"># 정수형</span></span>
-<span id="cb3-2"><a href="cpp-basic.html#cb3-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fl">1.5</span>     <span class="co"># 실수형</span></span>
-<span id="cb3-3"><a href="cpp-basic.html#cb3-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="cn">TRUE</span>    <span class="co"># 논리형</span></span>
-<span id="cb3-4"><a href="cpp-basic.html#cb3-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="st">&quot;Rcpp&quot;</span>  <span class="co"># 문자형</span></span></code></pre></div>
+<div id="matrix-값-접근" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Matrix 값 접근</h2>
+<p>Vector와 마찬가지로 matrix에서도 인덱싱과 슬라이싱을 할 수 있지만, 연속적인 위치가 아닌 값들을 동시에 가져오는 것은 불가능하다.
+다음의 코드를 확인해보자.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="rcpp-matrix.html#cb25-1" aria-hidden="true" tabindex="-1"></a>NumericMatrix A(<span class="dv">5</span>, <span class="dv">5</span>);</span>
+<span id="cb25-2"><a href="rcpp-matrix.html#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="rcpp-matrix.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">// A[2, 3]</span></span>
+<span id="cb25-4"><a href="rcpp-matrix.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> a11 = A(<span class="dv">1</span>, <span class="dv">2</span>);</span>
+<span id="cb25-5"><a href="rcpp-matrix.html#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="rcpp-matrix.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">// A[1, ]</span></span>
+<span id="cb25-7"><a href="rcpp-matrix.html#cb25-7" aria-hidden="true" tabindex="-1"></a>NumericVector row1 = A(<span class="dv">0</span>, _);</span>
+<span id="cb25-8"><a href="rcpp-matrix.html#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">// 또는</span></span>
+<span id="cb25-9"><a href="rcpp-matrix.html#cb25-9" aria-hidden="true" tabindex="-1"></a>NumericVector row1 = A.row(<span class="dv">0</span>);</span>
+<span id="cb25-10"><a href="rcpp-matrix.html#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="rcpp-matrix.html#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">// A[, 2]</span></span>
+<span id="cb25-12"><a href="rcpp-matrix.html#cb25-12" aria-hidden="true" tabindex="-1"></a>NumericVector col1 = A(_, <span class="dv">1</span>);</span>
+<span id="cb25-13"><a href="rcpp-matrix.html#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">// 또는</span></span>
+<span id="cb25-14"><a href="rcpp-matrix.html#cb25-14" aria-hidden="true" tabindex="-1"></a>NumericVector col1 = A.column(<span class="dv">1</span>);</span>
+<span id="cb25-15"><a href="rcpp-matrix.html#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="rcpp-matrix.html#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co">// A[1:2, 3:4]</span></span>
+<span id="cb25-17"><a href="rcpp-matrix.html#cb25-17" aria-hidden="true" tabindex="-1"></a>NumericMatrix B = A(Range(<span class="dv">0</span>, <span class="dv">1</span>), Range(<span class="dv">2</span>, <span class="dv">3</span>));</span></code></pre></div>
 </div>
-<div id="c에서-변수선언" class="section level3" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> C++에서 변수선언</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="cpp-basic.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a = <span class="dv">1</span>;        <span class="co">// 정수형</span></span>
-<span id="cb4-2"><a href="cpp-basic.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b = <span class="fl">1.5</span>;   <span class="co">// 실수형</span></span>
-<span id="cb4-3"><a href="cpp-basic.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> c = <span class="kw">true</span>;    <span class="co">// 논리형</span></span>
-<span id="cb4-4"><a href="cpp-basic.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span> d = <span class="st">&quot;Rcpp&quot;</span>;  <span class="co">// 문자형</span></span></code></pre></div>
-<p>C++에서는 항상 코드 줄의 마지막에 <code>;</code>(세미콜론)을 적어주어야 한다.</p>
+<div id="matrix-관련-함수" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Matrix 관련 함수</h2>
+<p><code>A</code>라는 Matrix 타입의 변수가 있다고 가정하자.</p>
+<div id="a.nrow-a.rows" class="section level3" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> <code>A.nrow()</code>, <code>A.rows()</code></h3>
+<p>Matrix <code>A</code>의 행 개수 반환</p>
 </div>
-<div id="미리-선언-후-나중에-값-저장" class="section level3" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> 미리 선언 후 나중에 값 저장</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="cpp-basic.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a;</span>
-<span id="cb5-2"><a href="cpp-basic.html#cb5-2" aria-hidden="true" tabindex="-1"></a>a = <span class="dv">100</span>;</span></code></pre></div>
-<p>R에서는 변수의 자료형을 지정해주지 않더라도 자동으로 자료형을 변환해주는 반면, C/C++에서는 자료형을 확실히 정해주어야 한다.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<div id="a.ncol-a.cols" class="section level3" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> <code>A.ncol()</code>, <code>A.cols()</code></h3>
+<p>Matrix <code>A</code>의 열 개수 반환</p>
 </div>
+<div id="a.rowi" class="section level3" number="7.3.3">
+<h3><span class="header-section-number">7.3.3</span> <code>A.row(i)</code></h3>
+<p>Matrix <code>A</code>의 i번쨰 행 반환 (return 타입은 Vector)</p>
 </div>
-<div id="if-문" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> if 문</h2>
-<div id="r에서의-if-문" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> R에서의 if 문</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="cpp-basic.html#cb6-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb6-2"><a href="cpp-basic.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
-<span id="cb6-3"><a href="cpp-basic.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;5보다 작다&quot;</span>)</span>
-<span id="cb6-4"><a href="cpp-basic.html#cb6-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">8</span>) {</span>
-<span id="cb6-5"><a href="cpp-basic.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;8보다 작다&quot;</span>)</span>
-<span id="cb6-6"><a href="cpp-basic.html#cb6-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb6-7"><a href="cpp-basic.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;8보다 크다&quot;</span>)</span>
-<span id="cb6-8"><a href="cpp-basic.html#cb6-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="a.colj" class="section level3" number="7.3.4">
+<h3><span class="header-section-number">7.3.4</span> <code>A.col(j)</code></h3>
+<p>Matrix <code>A</code>의 j번쨰 열 반환 (return 타입은 Vector)</p>
 </div>
-<div id="c에서의-if-문" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> C++에서의 if 문</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="cpp-basic.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a = <span class="dv">10</span>;</span>
-<span id="cb7-2"><a href="cpp-basic.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a &lt; <span class="dv">5</span>) {</span>
-<span id="cb7-3"><a href="cpp-basic.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;5보다 작다&quot;</span> &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
-<span id="cb7-4"><a href="cpp-basic.html#cb7-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (a &lt; <span class="dv">8</span>) {</span>
-<span id="cb7-5"><a href="cpp-basic.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;8보다 작다&quot;</span> &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
-<span id="cb7-6"><a href="cpp-basic.html#cb7-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb7-7"><a href="cpp-basic.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;8보다 크다&quot;</span> &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
-<span id="cb7-8"><a href="cpp-basic.html#cb7-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>C++에서 print를 하기 위해서는 C++ 표준 템플릿 라이브러리(STL : Standard Template Library) 내의 <code>std::cout</code>을 이용해야 한다. (Rcpp 내의 <code>Rcpp::Rcout</code>을 이용해도 된다.)</p>
-<p>여기서 <code>라이브러리::함수</code>는 라이브러리 내의 함수에 접근한다는 의미로 R에서도 동일하게 사용되는 방법이다.
-R에서와 마찬가지로 라이브러리명을 제외하고 함수명으로만 사용하는 방법은 <code>Namespace</code>를 활용하는 방법이며 이는 <a href="rcpp-structure.html#rcpp_structure">Rcpp 파일의 구조</a> 에서 설명하겠다.</p>
-</div>
-</div>
-<div id="for-문" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> for 문</h2>
-<div id="r에서의-for-문" class="section level3" number="2.4.1">
-<h3><span class="header-section-number">2.4.1</span> R에서의 for 문</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="cpp-basic.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb8-2"><a href="cpp-basic.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb8-3"><a href="cpp-basic.html#cb8-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-<div id="c에서의-for-문" class="section level3" number="2.4.2">
-<h3><span class="header-section-number">2.4.2</span> C++에서의 for 문</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="cpp-basic.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i++) {</span>
-<span id="cb9-2"><a href="cpp-basic.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">std::</span>cout &lt;&lt; i &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
-<span id="cb9-3"><a href="cpp-basic.html#cb9-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-</div>
-<div id="while-문" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> while 문</h2>
-<div id="r에서의-while-문" class="section level3" number="2.5.1">
-<h3><span class="header-section-number">2.5.1</span> R에서의 while 문</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="cpp-basic.html#cb10-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb10-2"><a href="cpp-basic.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (n <span class="sc">&lt;</span> <span class="dv">5</span>) {</span>
-<span id="cb10-3"><a href="cpp-basic.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(n)</span>
-<span id="cb10-4"><a href="cpp-basic.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> n <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb10-5"><a href="cpp-basic.html#cb10-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-<div id="c에서의-while-문" class="section level3" number="2.5.2">
-<h3><span class="header-section-number">2.5.2</span> C++에서의 while 문</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="cpp-basic.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n = <span class="dv">0</span>;</span>
-<span id="cb11-2"><a href="cpp-basic.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (n &lt; <span class="dv">5</span>) {</span>
-<span id="cb11-3"><a href="cpp-basic.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  Rcpp::Rcout &lt;&lt; n &lt;&lt; <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
-<span id="cb11-4"><a href="cpp-basic.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  n = n + <span class="dv">1</span>;</span>
-<span id="cb11-5"><a href="cpp-basic.html#cb11-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-</div>
-<div id="함수" class="section level2" number="2.6">
-<h2><span class="header-section-number">2.6</span> 함수</h2>
-<div id="r에서의-함수-정의" class="section level3" number="2.6.1">
-<h3><span class="header-section-number">2.6.1</span> R에서의 함수 정의</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="cpp-basic.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 두 실수의 합을 구하는 함수</span></span>
-<span id="cb12-2"><a href="cpp-basic.html#cb12-2" aria-hidden="true" tabindex="-1"></a>add <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
-<span id="cb12-3"><a href="cpp-basic.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">&lt;-</span> a <span class="sc">+</span> b</span>
-<span id="cb12-4"><a href="cpp-basic.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
-<span id="cb12-5"><a href="cpp-basic.html#cb12-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-<div id="c에서의-함수-정의" class="section level3" number="2.6.2">
-<h3><span class="header-section-number">2.6.2</span> C++에서의 함수 정의</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="cpp-basic.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 두 실수의 합을 구하는 함수</span></span>
-<span id="cb13-2"><a href="cpp-basic.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> add(<span class="dt">double</span> a,</span>
-<span id="cb13-3"><a href="cpp-basic.html#cb13-3" aria-hidden="true" tabindex="-1"></a>           <span class="dt">double</span> b) {</span>
-<span id="cb13-4"><a href="cpp-basic.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> val = a + b;</span>
-<span id="cb13-5"><a href="cpp-basic.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> val;</span>
-<span id="cb13-6"><a href="cpp-basic.html#cb13-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>C++에서 함수를 정의할 때 유의해야할 점은 <strong>input의 자료형과 output의 자료형을 반드시 명시</strong>해주어야 한다는 것이다.
-아마 R 사용자에게 가장 익숙치 않은 부분일 것이고, 보통 여기서 에러가 매우 많이 발생한다.
-이 부분을 항상 주의하도록 하자!</p>
+<div id="transposea" class="section level3" number="7.3.5">
+<h3><span class="header-section-number">7.3.5</span> <code>transpose(A)</code></h3>
+<p>Matrix <code>A</code>를 transpose한 Matrix 반환 (return 타입은 Matrix)</p>
 
 </div>
 </div>
-</div>
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>위의 4가지 뿐 아니라 실수의 자릿수 등을 더 디테일하게 정할 수 있는 자료형들이 존재하며 이는 많은 블로그들에서 확인할 수 있다.<a href="cpp-basic.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="install.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rcpp-structure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rcpp-vector.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rcpp-list.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

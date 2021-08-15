@@ -1,0 +1,15 @@
+# Rcpp 자료형 {#rcpp_datatype}
+
+Rcpp은 Vector와 Matrix를 비롯해 List, DataFrame의 R과 비슷한 형태의 자료구조를 제공하고 있다.
+
+## 데이터 타입
+다음의 표에서 R과 Rcpp, C++의 Vector와 matrix에 해당하는 자료형을 비교하여 볼 수 있다.
+
+| 자료형 | R | Rcpp (Vector) | Rcpp (Matrix) | Rcpp (Scalar) | C++ (Scalar) |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 정수형 | `integer` | `IntegerVector` | `IntegerMatrix` | - | `int` |
+| 실수형 | `numeric` | `NumericVector` | `NumericMatrix` | - | `double` |
+| 문자열 | `character` | `CharacterVector` (`StringVector`) | `CharacterMatrix` (`StringMatrix`) | `String` | `string` |
+| 논리형 | `logical` | `LogicalVector` | `LogicalMatrix` | - | `bool` |
+
+
