@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Eigen 자료형 | Rcpp과 RcppEigen 튜토리얼</title>
+  <title>Chapter 12 Eigen 자료형 | Rcpp과 RcppEigen 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Eigen 자료형 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta property="og:title" content="Chapter 12 Eigen 자료형 | Rcpp과 RcppEigen 튜토리얼" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Eigen 자료형 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 12 Eigen 자료형 | Rcpp과 RcppEigen 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rcpp-dataframe.html"/>
+<link rel="prev" href="rcpp-use-r-function.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -211,7 +211,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html"><i class="fa fa-check"></i><b>5</b> Rcpp 자료형</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#데이터-타입"><i class="fa fa-check"></i><b>5.1</b> 데이터 타입</a></li>
+<li class="chapter" data-level="5.1" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#vector와-matrix"><i class="fa fa-check"></i><b>5.1</b> Vector와 Matrix</a></li>
+<li class="chapter" data-level="5.2" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#list와-dataframe"><i class="fa fa-check"></i><b>5.2</b> List와 DataFrame</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="rcpp-vector.html"><a href="rcpp-vector.html"><i class="fa fa-check"></i><b>6</b> Vector</a>
 <ul>
@@ -244,11 +245,16 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1" data-path="rcpp-dataframe.html"><a href="rcpp-dataframe.html#dataframe"><i class="fa fa-check"></i><b>9.1</b> DataFrame</a></li>
 </ul></li>
-<li class="part"><span><b>II RcppEigen</b></span></li>
-<li class="chapter" data-level="10" data-path="eigen-basic.html"><a href="eigen-basic.html"><i class="fa fa-check"></i><b>10</b> Eigen 자료형</a>
+<li class="chapter" data-level="10" data-path="r-like-function.html"><a href="r-like-function.html"><i class="fa fa-check"></i><b>10</b> R과 비슷한 함수</a></li>
+<li class="chapter" data-level="11" data-path="rcpp-use-r-function.html"><a href="rcpp-use-r-function.html"><i class="fa fa-check"></i><b>11</b> R 함수 사용하기</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="eigen-basic.html"><a href="eigen-basic.html#vector"><i class="fa fa-check"></i><b>10.1</b> Vector</a></li>
-<li class="chapter" data-level="10.2" data-path="eigen-basic.html"><a href="eigen-basic.html#matrix"><i class="fa fa-check"></i><b>10.2</b> Matrix</a></li>
+<li class="chapter" data-level="11.1" data-path="rcpp-use-r-function.html"><a href="rcpp-use-r-function.html#r-패키지-내의-함수-사용"><i class="fa fa-check"></i><b>11.1</b> R 패키지 내의 함수 사용</a></li>
+</ul></li>
+<li class="part"><span><b>II RcppEigen</b></span></li>
+<li class="chapter" data-level="12" data-path="eigen-basic.html"><a href="eigen-basic.html"><i class="fa fa-check"></i><b>12</b> Eigen 자료형</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="eigen-basic.html"><a href="eigen-basic.html#vector"><i class="fa fa-check"></i><b>12.1</b> Vector</a></li>
+<li class="chapter" data-level="12.2" data-path="eigen-basic.html"><a href="eigen-basic.html#matrix"><i class="fa fa-check"></i><b>12.2</b> Matrix</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -271,13 +277,13 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="eigen_basic" class="section level1" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Eigen 자료형</h1>
-<div id="vector" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Vector</h2>
+<div id="eigen_basic" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Eigen 자료형</h1>
+<div id="vector" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Vector</h2>
 </div>
-<div id="matrix" class="section level2" number="10.2">
-<h2><span class="header-section-number">10.2</span> Matrix</h2>
+<div id="matrix" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Matrix</h2>
 
 </div>
 </div>
@@ -286,7 +292,7 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="rcpp-dataframe.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rcpp-use-r-function.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

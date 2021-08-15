@@ -1,0 +1,2 @@
+# R과 비슷한 함수 {#r_like_function}
+

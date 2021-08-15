@@ -28,7 +28,8 @@ rcpp-파일의-구조
 rcpp_source
 sourcecpp
 rcpp_datatype
-데이터-타입
+vector와-matrix
+list와-dataframe
 rcpp_vector
 vector-선언
 vector-값-접근
@@ -48,6 +49,9 @@ rcpp_list
 list
 rcpp_dataframe
 dataframe
+r_like_function
+rcpp_use_r_function
+r-패키지-내의-함수-사용
 eigen_basic
 vector
 matrix

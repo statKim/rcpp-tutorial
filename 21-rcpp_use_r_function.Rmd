@@ -1,0 +1,24 @@
+# R 함수 사용하기 {#rcpp_use_r_function}
+
+계산속도를 높이기 위해 Rcpp을 사용하지만, 이미 R에서 짜여진 함수를 다시 C++ 코드로 수정하는 것 또한 매우 어려운 일이다.
+하지만 다음과 같은 형식으로 R 패키지에 있는 함수를 C++ 구문에서 사용할 수 있다.
+
+
+## R 패키지 내의 함수 사용
+패키지의 포함된 함수의 경우는 다음과 같이 `Environment`를 설정해주어 R 함수 사용이 가능하다.
+
+다음은 `MASS` 패키지의 `huber()` 함수를 사용하는 예시이다.
+```cpp
+// [[Rcpp::export]]
+double huber_cpp(Rcpp::NumericVector x) {
+    // R 패키지 Environment 가져오기
+    Rcpp::Environment env("package:MASS");
+
+    // MASS::huber() 함수를 가져와서 "huber_r"이라는 함수로 사용한다는 설정
+    Rcpp::Function huber_r = env["huber"];
+
+    // 위에서 지정한 함수명으로 R 함수 실행(함수의 input은 List 형태로 들어감)
+    return huber_r(Rcpp::_["y"] = x,
+                   Rcpp::_["k"] = 1.5);
+}
+```

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼</title>
+  <title>Chapter 10 R과 비슷한 함수 | Rcpp과 RcppEigen 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta property="og:title" content="Chapter 10 R과 비슷한 함수 | Rcpp과 RcppEigen 튜토리얼" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Rcpp 자료형 | Rcpp과 RcppEigen 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 10 R과 비슷한 함수 | Rcpp과 RcppEigen 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rcpp-source.html"/>
-<link rel="next" href="rcpp-vector.html"/>
+<link rel="prev" href="rcpp-dataframe.html"/>
+<link rel="next" href="rcpp-use-r-function.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -277,104 +277,17 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rcpp_datatype" class="section level1" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Rcpp 자료형</h1>
-<p>Rcpp은 Vector와 Matrix를 비롯해 List, DataFrame의 R과 비슷한 형태의 자료구조를 제공하고 있다.</p>
-<div id="vector와-matrix" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Vector와 Matrix</h2>
-<p>다음의 표<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>에서 R과 Rcpp, C++의 Vector와 matrix에 해당하는 자료형을 비교하여 볼 수 있다.
-R에서는 Vector와 Scalar의 구분이 없지만, C++에서는 확실하게 구분되니 주의하자!</p>
-<table style="width:100%;">
-<colgroup>
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center">자료형</th>
-<th align="center">R</th>
-<th align="center">Rcpp (Vector)</th>
-<th align="center">Rcpp (Matrix)</th>
-<th align="center">Rcpp (Scalar)</th>
-<th align="center">C++ (Scalar)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">정수형</td>
-<td align="center"><code>integer</code></td>
-<td align="center"><code>IntegerVector</code></td>
-<td align="center"><code>IntegerMatrix</code></td>
-<td align="center">-</td>
-<td align="center"><code>int</code></td>
-</tr>
-<tr class="even">
-<td align="center">실수형</td>
-<td align="center"><code>numeric</code></td>
-<td align="center"><code>NumericVector</code></td>
-<td align="center"><code>NumericMatrix</code></td>
-<td align="center">-</td>
-<td align="center"><code>double</code></td>
-</tr>
-<tr class="odd">
-<td align="center">문자열</td>
-<td align="center"><code>character</code></td>
-<td align="center"><code>CharacterVector</code> (<code>StringVector</code>)</td>
-<td align="center"><code>CharacterMatrix</code> (<code>StringMatrix</code>)</td>
-<td align="center"><code>String</code></td>
-<td align="center"><code>string</code></td>
-</tr>
-<tr class="even">
-<td align="center">논리형</td>
-<td align="center"><code>logical</code></td>
-<td align="center"><code>LogicalVector</code></td>
-<td align="center"><code>LogicalMatrix</code></td>
-<td align="center">-</td>
-<td align="center"><code>bool</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="list와-dataframe" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> List와 DataFrame</h2>
-<table>
-<thead>
-<tr class="header">
-<th align="center">R</th>
-<th align="center">Rcpp</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><code>list</code></td>
-<td align="center"><code>List</code></td>
-</tr>
-<tr class="even">
-<td align="center"><code>data.frame</code></td>
-<td align="center"><code>DataFrame</code></td>
-</tr>
-</tbody>
-</table>
+<div id="r_like_function" class="section level1" number="10">
+<h1><span class="header-section-number">Chapter 10</span> R과 비슷한 함수</h1>
 
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="2">
-<li id="fn2"><p>표는 <a href="https://teuder.github.io/rcpp4everyone_en/070_data_types.html#data.frame-list-s3-s4" class="uri">https://teuder.github.io/rcpp4everyone_en/070_data_types.html#data.frame-list-s3-s4</a>에서 일부를 가져왔으며, 링크에서 더 다양한 자료형을 확인할 수 있다.<a href="rcpp-datatype.html#fnref2" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="rcpp-source.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rcpp-vector.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rcpp-dataframe.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rcpp-use-r-function.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
