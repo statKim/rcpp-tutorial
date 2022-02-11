@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Rcpp과 RcppEigen 튜토리얼</title>
+  <title>References | Rcpp 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Rcpp과 RcppEigen 튜토리얼" />
+  <meta property="og:title" content="References | Rcpp 튜토리얼" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Rcpp과 RcppEigen 튜토리얼" />
+  <meta name="twitter:title" content="References | Rcpp 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -24,17 +24,18 @@
 <meta name="author" content="김현성" />
 
 
-<meta name="date" content="2021-08-15" />
+<meta name="date" content="2022-02-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="eigen-basic.html"/>
+<link rel="prev" href="arma_basic.html"/>
 
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -59,6 +59,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -155,7 +156,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Rcpp과 RcppEigen 튜토리얼</a></li>
+<li><a href="./">Rcpp 튜토리얼</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>들어가며</a></li>
@@ -169,92 +170,98 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="install.html"><a href="install.html#패키지-설치"><i class="fa fa-check"></i><b>1.2</b> 패키지 설치</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="cpp-basic.html"><a href="cpp-basic.html"><i class="fa fa-check"></i><b>2</b> C++ 기초 문법</a>
+<li class="chapter" data-level="2" data-path="cpp_basic.html"><a href="cpp_basic.html"><i class="fa fa-check"></i><b>2</b> C++ 기초 문법</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="cpp-basic.html"><a href="cpp-basic.html#라이브러리-불러오기"><i class="fa fa-check"></i><b>2.1</b> 라이브러리 불러오기</a></li>
-<li class="chapter" data-level="2.2" data-path="cpp-basic.html"><a href="cpp-basic.html#변수선언"><i class="fa fa-check"></i><b>2.2</b> 변수선언</a>
+<li class="chapter" data-level="2.1" data-path="cpp_basic.html"><a href="cpp_basic.html#라이브러리-불러오기"><i class="fa fa-check"></i><b>2.1</b> 라이브러리 불러오기</a></li>
+<li class="chapter" data-level="2.2" data-path="cpp_basic.html"><a href="cpp_basic.html#변수선언"><i class="fa fa-check"></i><b>2.2</b> 변수선언</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="cpp-basic.html"><a href="cpp-basic.html#r에서-변수선언"><i class="fa fa-check"></i><b>2.2.1</b> R에서 변수선언</a></li>
-<li class="chapter" data-level="2.2.2" data-path="cpp-basic.html"><a href="cpp-basic.html#c에서-변수선언"><i class="fa fa-check"></i><b>2.2.2</b> C++에서 변수선언</a></li>
-<li class="chapter" data-level="2.2.3" data-path="cpp-basic.html"><a href="cpp-basic.html#미리-선언-후-나중에-값-저장"><i class="fa fa-check"></i><b>2.2.3</b> 미리 선언 후 나중에 값 저장</a></li>
+<li class="chapter" data-level="2.2.1" data-path="cpp_basic.html"><a href="cpp_basic.html#r에서-변수선언"><i class="fa fa-check"></i><b>2.2.1</b> R에서 변수선언</a></li>
+<li class="chapter" data-level="2.2.2" data-path="cpp_basic.html"><a href="cpp_basic.html#c에서-변수선언"><i class="fa fa-check"></i><b>2.2.2</b> C++에서 변수선언</a></li>
+<li class="chapter" data-level="2.2.3" data-path="cpp_basic.html"><a href="cpp_basic.html#미리-선언-후-나중에-값-저장"><i class="fa fa-check"></i><b>2.2.3</b> 미리 선언 후 나중에 값 저장</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="cpp-basic.html"><a href="cpp-basic.html#if-문"><i class="fa fa-check"></i><b>2.3</b> if 문</a>
+<li class="chapter" data-level="2.3" data-path="cpp_basic.html"><a href="cpp_basic.html#if-문"><i class="fa fa-check"></i><b>2.3</b> if 문</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="cpp-basic.html"><a href="cpp-basic.html#r에서의-if-문"><i class="fa fa-check"></i><b>2.3.1</b> R에서의 if 문</a></li>
-<li class="chapter" data-level="2.3.2" data-path="cpp-basic.html"><a href="cpp-basic.html#c에서의-if-문"><i class="fa fa-check"></i><b>2.3.2</b> C++에서의 if 문</a></li>
+<li class="chapter" data-level="2.3.1" data-path="cpp_basic.html"><a href="cpp_basic.html#r에서의-if-문"><i class="fa fa-check"></i><b>2.3.1</b> R에서의 if 문</a></li>
+<li class="chapter" data-level="2.3.2" data-path="cpp_basic.html"><a href="cpp_basic.html#c에서의-if-문"><i class="fa fa-check"></i><b>2.3.2</b> C++에서의 if 문</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="cpp-basic.html"><a href="cpp-basic.html#for-문"><i class="fa fa-check"></i><b>2.4</b> for 문</a>
+<li class="chapter" data-level="2.4" data-path="cpp_basic.html"><a href="cpp_basic.html#for-문"><i class="fa fa-check"></i><b>2.4</b> for 문</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="cpp-basic.html"><a href="cpp-basic.html#r에서의-for-문"><i class="fa fa-check"></i><b>2.4.1</b> R에서의 for 문</a></li>
-<li class="chapter" data-level="2.4.2" data-path="cpp-basic.html"><a href="cpp-basic.html#c에서의-for-문"><i class="fa fa-check"></i><b>2.4.2</b> C++에서의 for 문</a></li>
+<li class="chapter" data-level="2.4.1" data-path="cpp_basic.html"><a href="cpp_basic.html#r에서의-for-문"><i class="fa fa-check"></i><b>2.4.1</b> R에서의 for 문</a></li>
+<li class="chapter" data-level="2.4.2" data-path="cpp_basic.html"><a href="cpp_basic.html#c에서의-for-문"><i class="fa fa-check"></i><b>2.4.2</b> C++에서의 for 문</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="cpp-basic.html"><a href="cpp-basic.html#while-문"><i class="fa fa-check"></i><b>2.5</b> while 문</a>
+<li class="chapter" data-level="2.5" data-path="cpp_basic.html"><a href="cpp_basic.html#while-문"><i class="fa fa-check"></i><b>2.5</b> while 문</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="cpp-basic.html"><a href="cpp-basic.html#r에서의-while-문"><i class="fa fa-check"></i><b>2.5.1</b> R에서의 while 문</a></li>
-<li class="chapter" data-level="2.5.2" data-path="cpp-basic.html"><a href="cpp-basic.html#c에서의-while-문"><i class="fa fa-check"></i><b>2.5.2</b> C++에서의 while 문</a></li>
+<li class="chapter" data-level="2.5.1" data-path="cpp_basic.html"><a href="cpp_basic.html#r에서의-while-문"><i class="fa fa-check"></i><b>2.5.1</b> R에서의 while 문</a></li>
+<li class="chapter" data-level="2.5.2" data-path="cpp_basic.html"><a href="cpp_basic.html#c에서의-while-문"><i class="fa fa-check"></i><b>2.5.2</b> C++에서의 while 문</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="cpp-basic.html"><a href="cpp-basic.html#함수"><i class="fa fa-check"></i><b>2.6</b> 함수</a>
+<li class="chapter" data-level="2.6" data-path="cpp_basic.html"><a href="cpp_basic.html#함수"><i class="fa fa-check"></i><b>2.6</b> 함수</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="cpp-basic.html"><a href="cpp-basic.html#r에서의-함수-정의"><i class="fa fa-check"></i><b>2.6.1</b> R에서의 함수 정의</a></li>
-<li class="chapter" data-level="2.6.2" data-path="cpp-basic.html"><a href="cpp-basic.html#c에서의-함수-정의"><i class="fa fa-check"></i><b>2.6.2</b> C++에서의 함수 정의</a></li>
+<li class="chapter" data-level="2.6.1" data-path="cpp_basic.html"><a href="cpp_basic.html#r에서의-함수-정의"><i class="fa fa-check"></i><b>2.6.1</b> R에서의 함수 정의</a></li>
+<li class="chapter" data-level="2.6.2" data-path="cpp_basic.html"><a href="cpp_basic.html#c에서의-함수-정의"><i class="fa fa-check"></i><b>2.6.2</b> C++에서의 함수 정의</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>I Rcpp</b></span></li>
-<li class="chapter" data-level="3" data-path="rcpp-structure.html"><a href="rcpp-structure.html"><i class="fa fa-check"></i><b>3</b> Rcpp 구조</a>
+<li class="chapter" data-level="3" data-path="rcpp_structure.html"><a href="rcpp_structure.html"><i class="fa fa-check"></i><b>3</b> Rcpp 구조</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="rcpp-structure.html"><a href="rcpp-structure.html#rcpp-파일의-구조"><i class="fa fa-check"></i><b>3.1</b> Rcpp 파일의 구조</a></li>
-<li class="chapter" data-level="3.2" data-path="rcpp-structure.html"><a href="rcpp-structure.html#구조-뜯어보기"><i class="fa fa-check"></i><b>3.2</b> 구조 뜯어보기</a></li>
+<li class="chapter" data-level="3.1" data-path="rcpp_structure.html"><a href="rcpp_structure.html#rcpp-파일의-구조"><i class="fa fa-check"></i><b>3.1</b> Rcpp 파일의 구조</a></li>
+<li class="chapter" data-level="3.2" data-path="rcpp_structure.html"><a href="rcpp_structure.html#구조-뜯어보기"><i class="fa fa-check"></i><b>3.2</b> 구조 뜯어보기</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="rcpp-source.html"><a href="rcpp-source.html"><i class="fa fa-check"></i><b>4</b> Rcpp 실행</a>
+<li class="chapter" data-level="4" data-path="rcpp_source.html"><a href="rcpp_source.html"><i class="fa fa-check"></i><b>4</b> Rcpp 실행</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="rcpp-source.html"><a href="rcpp-source.html#sourcecpp"><i class="fa fa-check"></i><b>4.1</b> <code>sourceCpp()</code></a></li>
+<li class="chapter" data-level="4.1" data-path="rcpp_source.html"><a href="rcpp_source.html#sourcecpp"><i class="fa fa-check"></i><b>4.1</b> <code>sourceCpp()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html"><i class="fa fa-check"></i><b>5</b> Rcpp 자료형</a>
+<li class="chapter" data-level="5" data-path="rcpp_datatype.html"><a href="rcpp_datatype.html"><i class="fa fa-check"></i><b>5</b> Rcpp 자료형</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#vector와-matrix"><i class="fa fa-check"></i><b>5.1</b> Vector와 Matrix</a></li>
-<li class="chapter" data-level="5.2" data-path="rcpp-datatype.html"><a href="rcpp-datatype.html#list와-dataframe"><i class="fa fa-check"></i><b>5.2</b> List와 DataFrame</a></li>
+<li class="chapter" data-level="5.1" data-path="rcpp_datatype.html"><a href="rcpp_datatype.html#vector와-matrix"><i class="fa fa-check"></i><b>5.1</b> Vector와 Matrix</a></li>
+<li class="chapter" data-level="5.2" data-path="rcpp_datatype.html"><a href="rcpp_datatype.html#list와-dataframe"><i class="fa fa-check"></i><b>5.2</b> List와 DataFrame</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="rcpp-vector.html"><a href="rcpp-vector.html"><i class="fa fa-check"></i><b>6</b> Vector</a>
+<li class="chapter" data-level="6" data-path="rcpp_vector.html"><a href="rcpp_vector.html"><i class="fa fa-check"></i><b>6</b> Vector</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="rcpp-vector.html"><a href="rcpp-vector.html#vector-선언"><i class="fa fa-check"></i><b>6.1</b> Vector 선언</a></li>
-<li class="chapter" data-level="6.2" data-path="rcpp-vector.html"><a href="rcpp-vector.html#vector-값-접근"><i class="fa fa-check"></i><b>6.2</b> Vector 값 접근</a></li>
-<li class="chapter" data-level="6.3" data-path="rcpp-vector.html"><a href="rcpp-vector.html#vector-관련-함수"><i class="fa fa-check"></i><b>6.3</b> Vector 관련 함수</a>
+<li class="chapter" data-level="6.1" data-path="rcpp_vector.html"><a href="rcpp_vector.html#vector-선언"><i class="fa fa-check"></i><b>6.1</b> Vector 선언</a></li>
+<li class="chapter" data-level="6.2" data-path="rcpp_vector.html"><a href="rcpp_vector.html#vector-값-접근"><i class="fa fa-check"></i><b>6.2</b> Vector 값 접근</a></li>
+<li class="chapter" data-level="6.3" data-path="rcpp_vector.html"><a href="rcpp_vector.html#vector-관련-함수"><i class="fa fa-check"></i><b>6.3</b> Vector 관련 함수</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="rcpp-vector.html"><a href="rcpp-vector.html#a.length-a.size"><i class="fa fa-check"></i><b>6.3.1</b> <code>a.length()</code>, <code>a.size()</code></a></li>
-<li class="chapter" data-level="6.3.2" data-path="rcpp-vector.html"><a href="rcpp-vector.html#a.sort"><i class="fa fa-check"></i><b>6.3.2</b> <code>a.sort()</code></a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html"><i class="fa fa-check"></i><b>7</b> Matrix</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#matrix-선언"><i class="fa fa-check"></i><b>7.1</b> Matrix 선언</a></li>
-<li class="chapter" data-level="7.2" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#matrix-값-접근"><i class="fa fa-check"></i><b>7.2</b> Matrix 값 접근</a></li>
-<li class="chapter" data-level="7.3" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#matrix-관련-함수"><i class="fa fa-check"></i><b>7.3</b> Matrix 관련 함수</a>
-<ul>
-<li class="chapter" data-level="7.3.1" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#a.nrow-a.rows"><i class="fa fa-check"></i><b>7.3.1</b> <code>A.nrow()</code>, <code>A.rows()</code></a></li>
-<li class="chapter" data-level="7.3.2" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#a.ncol-a.cols"><i class="fa fa-check"></i><b>7.3.2</b> <code>A.ncol()</code>, <code>A.cols()</code></a></li>
-<li class="chapter" data-level="7.3.3" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#a.rowi"><i class="fa fa-check"></i><b>7.3.3</b> <code>A.row(i)</code></a></li>
-<li class="chapter" data-level="7.3.4" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#a.colj"><i class="fa fa-check"></i><b>7.3.4</b> <code>A.col(j)</code></a></li>
-<li class="chapter" data-level="7.3.5" data-path="rcpp-matrix.html"><a href="rcpp-matrix.html#transposea"><i class="fa fa-check"></i><b>7.3.5</b> <code>transpose(A)</code></a></li>
+<li class="chapter" data-level="6.3.1" data-path="rcpp_vector.html"><a href="rcpp_vector.html#a.length-a.size"><i class="fa fa-check"></i><b>6.3.1</b> <code>a.length()</code>, <code>a.size()</code></a></li>
+<li class="chapter" data-level="6.3.2" data-path="rcpp_vector.html"><a href="rcpp_vector.html#a.sort"><i class="fa fa-check"></i><b>6.3.2</b> <code>a.sort()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="rcpp-list.html"><a href="rcpp-list.html"><i class="fa fa-check"></i><b>8</b> List</a>
+<li class="chapter" data-level="7" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html"><i class="fa fa-check"></i><b>7</b> Matrix</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="rcpp-list.html"><a href="rcpp-list.html#list"><i class="fa fa-check"></i><b>8.1</b> List</a></li>
+<li class="chapter" data-level="7.1" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html#matrix-선언"><i class="fa fa-check"></i><b>7.1</b> Matrix 선언</a></li>
+<li class="chapter" data-level="7.2" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html#matrix-값-접근"><i class="fa fa-check"></i><b>7.2</b> Matrix 값 접근</a></li>
+<li class="chapter" data-level="7.3" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html#matrix-관련-함수"><i class="fa fa-check"></i><b>7.3</b> Matrix 관련 함수</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html#a.nrow-a.rows"><i class="fa fa-check"></i><b>7.3.1</b> <code>A.nrow()</code>, <code>A.rows()</code></a></li>
+<li class="chapter" data-level="7.3.2" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html#a.ncol-a.cols"><i class="fa fa-check"></i><b>7.3.2</b> <code>A.ncol()</code>, <code>A.cols()</code></a></li>
+<li class="chapter" data-level="7.3.3" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html#a.rowi"><i class="fa fa-check"></i><b>7.3.3</b> <code>A.row(i)</code></a></li>
+<li class="chapter" data-level="7.3.4" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html#a.colj"><i class="fa fa-check"></i><b>7.3.4</b> <code>A.col(j)</code></a></li>
+<li class="chapter" data-level="7.3.5" data-path="rcpp_matrix.html"><a href="rcpp_matrix.html#transposea"><i class="fa fa-check"></i><b>7.3.5</b> <code>transpose(A)</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="rcpp-dataframe.html"><a href="rcpp-dataframe.html"><i class="fa fa-check"></i><b>9</b> DataFrame</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="rcpp-dataframe.html"><a href="rcpp-dataframe.html#dataframe"><i class="fa fa-check"></i><b>9.1</b> DataFrame</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="r-like-function.html"><a href="r-like-function.html"><i class="fa fa-check"></i><b>10</b> R과 비슷한 함수</a></li>
-<li class="chapter" data-level="11" data-path="rcpp-use-r-function.html"><a href="rcpp-use-r-function.html"><i class="fa fa-check"></i><b>11</b> R 함수 사용하기</a>
+<li class="chapter" data-level="8" data-path="rcpp_list.html"><a href="rcpp_list.html"><i class="fa fa-check"></i><b>8</b> List</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="rcpp-use-r-function.html"><a href="rcpp-use-r-function.html#r-패키지-내의-함수-사용"><i class="fa fa-check"></i><b>11.1</b> R 패키지 내의 함수 사용</a></li>
+<li class="chapter" data-level="8.1" data-path="rcpp_list.html"><a href="rcpp_list.html#list"><i class="fa fa-check"></i><b>8.1</b> List</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="rcpp_dataframe.html"><a href="rcpp_dataframe.html"><i class="fa fa-check"></i><b>9</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="rcpp_dataframe.html"><a href="rcpp_dataframe.html#dataframe"><i class="fa fa-check"></i><b>9.1</b> DataFrame</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="r_like_function.html"><a href="r_like_function.html"><i class="fa fa-check"></i><b>10</b> R과 비슷한 함수</a></li>
+<li class="chapter" data-level="11" data-path="rcpp_use_r_function.html"><a href="rcpp_use_r_function.html"><i class="fa fa-check"></i><b>11</b> R 함수 사용하기</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="rcpp_use_r_function.html"><a href="rcpp_use_r_function.html#r-패키지-내의-함수-사용"><i class="fa fa-check"></i><b>11.1</b> R 패키지 내의 함수 사용</a></li>
 </ul></li>
 <li class="part"><span><b>II RcppEigen</b></span></li>
-<li class="chapter" data-level="12" data-path="eigen-basic.html"><a href="eigen-basic.html"><i class="fa fa-check"></i><b>12</b> Eigen 자료형</a>
+<li class="chapter" data-level="12" data-path="eigen_basic.html"><a href="eigen_basic.html"><i class="fa fa-check"></i><b>12</b> Eigen 자료형</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="eigen-basic.html"><a href="eigen-basic.html#vector"><i class="fa fa-check"></i><b>12.1</b> Vector</a></li>
-<li class="chapter" data-level="12.2" data-path="eigen-basic.html"><a href="eigen-basic.html#matrix"><i class="fa fa-check"></i><b>12.2</b> Matrix</a></li>
+<li class="chapter" data-level="12.1" data-path="eigen_basic.html"><a href="eigen_basic.html#vector"><i class="fa fa-check"></i><b>12.1</b> Vector</a></li>
+<li class="chapter" data-level="12.2" data-path="eigen_basic.html"><a href="eigen_basic.html#matrix"><i class="fa fa-check"></i><b>12.2</b> Matrix</a></li>
+</ul></li>
+<li class="part"><span><b>III RcppArmadillo</b></span></li>
+<li class="chapter" data-level="13" data-path="arma_basic.html"><a href="arma_basic.html"><i class="fa fa-check"></i><b>13</b> Armadillo 자료형</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="arma_basic.html"><a href="arma_basic.html#vector-1"><i class="fa fa-check"></i><b>13.1</b> Vector</a></li>
+<li class="chapter" data-level="13.2" data-path="arma_basic.html"><a href="arma_basic.html#matrix-1"><i class="fa fa-check"></i><b>13.2</b> Matrix</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -269,7 +276,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rcpp과 RcppEigen 튜토리얼</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rcpp 튜토리얼</a>
           </h1>
         </div>
 
@@ -282,7 +289,13 @@ div.csl-indent {
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div class="csl-entry">
-Eddelbuettel, Dirk, Romain Francois, JJ Allaire, Kevin Ushey, Qiang Kou, Nathan Russell, Douglas Bates, and John Chambers. 2021. <em>Rcpp: Seamless r and c++ Integration</em>. <a href="https://CRAN.R-project.org/package=Rcpp">https://CRAN.R-project.org/package=Rcpp</a>.
+Bates, Douglas, Dirk Eddelbuettel, Romain Francois, and Yixuan Qiu; the authors of Eigen for the included version of Eigen. 2020. <em>RcppEigen: Rcpp Integration for the Eigen Templated Linear Algebra Library</em>. <a href="http://dirk.eddelbuettel.com/code/rcpp.eigen.html">http://dirk.eddelbuettel.com/code/rcpp.eigen.html</a>.
+</div>
+<div class="csl-entry">
+Eddelbuettel, Dirk, Romain Francois, JJ Allaire, Kevin Ushey, Qiang Kou, Nathan Russell, Inaki Ucar, Douglas Bates, and John Chambers. 2022. <em>Rcpp: Seamless r and c++ Integration</em>. <a href="https://CRAN.R-project.org/package=Rcpp">https://CRAN.R-project.org/package=Rcpp</a>.
+</div>
+<div class="csl-entry">
+Eddelbuettel, Dirk, Romain Francois, Doug Bates, Binxiang Ni, and Conrad Sanderson. 2022. <em>RcppArmadillo: Rcpp Integration for the Armadillo Templated Linear Algebra Library</em>. <a href="https://CRAN.R-project.org/package=RcppArmadillo">https://CRAN.R-project.org/package=RcppArmadillo</a>.
 </div>
 </div>
 </div>
@@ -298,12 +311,11 @@ Eddelbuettel, Dirk, Romain Francois, JJ Allaire, Kevin Ushey, Qiang Kou, Nathan 
           </div>
         </div>
       </div>
-<a href="eigen-basic.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="arma_basic.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -343,6 +355,10 @@ gitbook.start({
 "text": null
 },
 "download": ["rcpp-tutorial.pdf", "rcpp-tutorial.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

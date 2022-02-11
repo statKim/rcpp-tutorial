@@ -55,3 +55,6 @@ r-패키지-내의-함수-사용
 eigen_basic
 vector
 matrix
+arma_basic
+vector-1
+matrix-1
