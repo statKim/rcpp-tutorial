@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 List | Rcpp 튜토리얼</title>
+  <title>Chapter 12 C++ 코드 분리하기 | Rcpp 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 List | Rcpp 튜토리얼" />
+  <meta property="og:title" content="Chapter 12 C++ 코드 분리하기 | Rcpp 튜토리얼" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="C++로 R 연산속도 높이기" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 List | Rcpp 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 12 C++ 코드 분리하기 | Rcpp 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rcpp_matrix.html"/>
-<link rel="next" href="rcpp_dataframe.html"/>
+<link rel="prev" href="rcpp_use_r_function.html"/>
+<link rel="next" href="eigen_basic.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -293,20 +293,77 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="rcpp_list" class="section level1 hasAnchor" number="8">
-<h1><span class="header-section-number">Chapter 8</span> List<a href="rcpp_list.html#rcpp_list" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="list" class="section level2 hasAnchor" number="8.1">
-<h2><span class="header-section-number">8.1</span> List<a href="rcpp_list.html#list" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="rcpp_use_header" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> C++ 코드 분리하기<a href="rcpp_use_header.html#rcpp_use_header" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>R에서 <code>source(R_file)</code>과 같이 같은 C++ 함수를 다른 C++ 코드에서 사용하고자 할 때는 <code>header</code> 파일을 만들어서 사용할 수 있다.</p>
+<p>header 파일은 <code>.cpp</code> 파일과 비슷하지만 <code>.h</code> 확장자를 가지고, 함수의 namespace 등을 정리해놓은 파일로 볼 수 있다. (즉, 여기에 있는 함수가 다른 cpp 파일에 있을테니 찾아서 쓰라는 것으로 생각해볼 수 있을 것 같다.)</p>
+<p>이제 다음과 같이 2개의 cpp 파일과 1개의 header 파일을 만든다.</p>
+<ul>
+<li>functions.cpp</li>
+<li>functions.h</li>
+<li>main_code.cpp</li>
+</ul>
+<div id="header-파일" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> header 파일<a href="rcpp_use_header.html#header-파일" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>먼저 다른 파일로 정의된 <code>functions.cpp</code>에 <code>add()</code>라는 함수가 정의되어 있다.
+이 함수를 <code>main_code.cpp</code>에서 불러와 사용하기 위한 header 파일을 만들 것이다.
+이에 앞서 <code>functions.cpp</code>에 다음과 같이 <code>#include "functions.h"</code>를 추가해준다.</p>
+<ul>
+<li><p><code>functions.cpp</code></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb27-1"><a href="rcpp_use_header.html#cb27-1" tabindex="-1"></a><span class="co">// functions.cpp</span></span>
+<span id="cb27-2"><a href="rcpp_use_header.html#cb27-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;functions.h&quot;</span><span class="pp">  </span><span class="co">// 이 부분을 추가해준다</span></span>
+<span id="cb27-3"><a href="rcpp_use_header.html#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="rcpp_use_header.html#cb27-4" tabindex="-1"></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-5"><a href="rcpp_use_header.html#cb27-5" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb27-6"><a href="rcpp_use_header.html#cb27-6" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+</ul>
+<p>위 cpp 파일에 대응되는 header 파일을 다음과 같이 만든다.
+<code>functions.cpp</code>에 포함되어 있는 <code>add()</code> 함수에 대한 namespace를 넣어준다.</p>
+<ul>
+<li><p><code>functions.h</code></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode h"><code class="sourceCode c"><span id="cb28-1"><a href="rcpp_use_header.html#cb28-1" tabindex="-1"></a><span class="co">// functions.h</span></span>
+<span id="cb28-2"><a href="rcpp_use_header.html#cb28-2" tabindex="-1"></a><span class="pp">#ifndef FUNCTIONS_H  </span><span class="co">// #ifndef ~ #endif로 묶어주고</span></span>
+<span id="cb28-3"><a href="rcpp_use_header.html#cb28-3" tabindex="-1"></a><span class="pp">#define FUNCTIONS_H  </span><span class="co">// #define 으로 header 파일을 정의</span></span>
+<span id="cb28-4"><a href="rcpp_use_header.html#cb28-4" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="rcpp_use_header.html#cb28-5" tabindex="-1"></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span>  <span class="co">// functions.cpp 파일의 add() 함수에 대한 namespace</span></span>
+<span id="cb28-6"><a href="rcpp_use_header.html#cb28-6" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="rcpp_use_header.html#cb28-7" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div></li>
+</ul>
+</div>
+<div id="main-함수" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> main 함수<a href="rcpp_use_header.html#main-함수" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>main 코드에서는 <code>#include "functions.h"</code>를 추가하여 <code>functions.cpp</code>에 포함된 <code>add()</code> 함수를 사용할 수 있다.</p>
+<ul>
+<li><p><code>main_code.cpp</code></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb29-1"><a href="rcpp_use_header.html#cb29-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span></span>
+<span id="cb29-2"><a href="rcpp_use_header.html#cb29-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;functions.h&quot;</span></span>
+<span id="cb29-3"><a href="rcpp_use_header.html#cb29-3" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="rcpp_use_header.html#cb29-4" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> Rcpp<span class="op">;</span></span>
+<span id="cb29-5"><a href="rcpp_use_header.html#cb29-5" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="rcpp_use_header.html#cb29-6" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb29-7"><a href="rcpp_use_header.html#cb29-7" tabindex="-1"></a><span class="dt">int</span> addTwoNumbers<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-8"><a href="rcpp_use_header.html#cb29-8" tabindex="-1"></a>  <span class="cf">return</span> add<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb29-9"><a href="rcpp_use_header.html#cb29-9" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb29-10"><a href="rcpp_use_header.html#cb29-10" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="rcpp_use_header.html#cb29-11" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="rcpp_use_header.html#cb29-12" tabindex="-1"></a><span class="co">/*** R</span></span>
+<span id="cb29-13"><a href="rcpp_use_header.html#cb29-13" tabindex="-1"></a><span class="co">addTwoNumbers(1, 3)</span></span>
+<span id="cb29-14"><a href="rcpp_use_header.html#cb29-14" tabindex="-1"></a><span class="co">*/</span></span></code></pre></div>
+<pre><code>[1] 4</code></pre></li>
+</ul>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="rcpp_matrix.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rcpp_dataframe.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rcpp_use_r_function.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="eigen_basic.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

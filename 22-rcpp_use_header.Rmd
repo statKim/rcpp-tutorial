@@ -1,0 +1,68 @@
+# C++ 코드 분리하기 {#rcpp_use_header}
+
+R에서 `source(R_file)`과 같이 같은 C++ 함수를 다른 C++ 코드에서 사용하고자 할 때는 `header` 파일을 만들어서 사용할 수 있다.
+
+header 파일은 `.cpp` 파일과 비슷하지만 `.h` 확장자를 가지고, 함수의 namespace 등을 정리해놓은 파일로 볼 수 있다. (즉, 여기에 있는 함수가 다른 cpp 파일에 있을테니 찾아서 쓰라는 것으로 생각해볼 수 있을 것 같다.)
+
+이제 다음과 같이 2개의 cpp 파일과 1개의 header 파일을 만든다.
+
+- functions.cpp
+- functions.h
+- main_code.cpp
+
+
+## header 파일
+
+먼저 다른 파일로 정의된 `functions.cpp`에 `add()`라는 함수가 정의되어 있다.
+이 함수를 `main_code.cpp`에서 불러와 사용하기 위한 header 파일을 만들 것이다.
+이에 앞서 `functions.cpp`에 다음과 같이 `#include "functions.h"`를 추가해준다.
+
+- `functions.cpp`
+  ```cpp
+  // functions.cpp
+  #include "functions.h"  // 이 부분을 추가해준다
+  
+  int add(int a, int b) {
+      return a + b;
+  }
+  ```
+
+위 cpp 파일에 대응되는 header 파일을 다음과 같이 만든다.
+`functions.cpp`에 포함되어 있는 `add()` 함수에 대한 namespace를 넣어준다.
+
+- `functions.h`
+  ```h
+  // functions.h
+  #ifndef FUNCTIONS_H  // #ifndef ~ #endif로 묶어주고
+  #define FUNCTIONS_H  // #define 으로 header 파일을 정의
+  
+  int add(int a, int b);  // functions.cpp 파일의 add() 함수에 대한 namespace
+  
+  #endif
+  ```
+
+
+## main 함수
+main 코드에서는 `#include "functions.h"`를 추가하여 `functions.cpp`에 포함된 `add()` 함수를 사용할 수 있다.
+
+- `main_code.cpp`
+  ```cpp
+  #include <Rcpp.h>
+  #include "functions.h"
+  
+  using namespace Rcpp;
+  
+  // [[Rcpp::export]]
+  int addTwoNumbers(int a, int b) {
+    return add(a, b);
+  }
+  
+  
+  /*** R
+  addTwoNumbers(1, 3)
+  */
+  ```
+  
+  ```
+  [1] 4
+  ```

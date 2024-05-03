@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Rcpp 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Rcpp 튜토리얼" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="C++로 R 연산속도 높이기" />
   
@@ -24,7 +23,7 @@
 <meta name="author" content="김현성" />
 
 
-<meta name="date" content="2022-02-11" />
+<meta name="date" content="2024-05-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 
 <link rel="next" href="install.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,13 +49,14 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -121,10 +120,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 <style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -251,17 +255,22 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="11.1" data-path="rcpp_use_r_function.html"><a href="rcpp_use_r_function.html#r-패키지-내의-함수-사용"><i class="fa fa-check"></i><b>11.1</b> R 패키지 내의 함수 사용</a></li>
 </ul></li>
-<li class="part"><span><b>II RcppEigen</b></span></li>
-<li class="chapter" data-level="12" data-path="eigen_basic.html"><a href="eigen_basic.html"><i class="fa fa-check"></i><b>12</b> Eigen 자료형</a>
+<li class="chapter" data-level="12" data-path="rcpp_use_header.html"><a href="rcpp_use_header.html"><i class="fa fa-check"></i><b>12</b> C++ 코드 분리하기</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="eigen_basic.html"><a href="eigen_basic.html#vector"><i class="fa fa-check"></i><b>12.1</b> Vector</a></li>
-<li class="chapter" data-level="12.2" data-path="eigen_basic.html"><a href="eigen_basic.html#matrix"><i class="fa fa-check"></i><b>12.2</b> Matrix</a></li>
+<li class="chapter" data-level="12.1" data-path="rcpp_use_header.html"><a href="rcpp_use_header.html#header-파일"><i class="fa fa-check"></i><b>12.1</b> header 파일</a></li>
+<li class="chapter" data-level="12.2" data-path="rcpp_use_header.html"><a href="rcpp_use_header.html#main-함수"><i class="fa fa-check"></i><b>12.2</b> main 함수</a></li>
+</ul></li>
+<li class="part"><span><b>II RcppEigen</b></span></li>
+<li class="chapter" data-level="13" data-path="eigen_basic.html"><a href="eigen_basic.html"><i class="fa fa-check"></i><b>13</b> Eigen 자료형</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="eigen_basic.html"><a href="eigen_basic.html#vector"><i class="fa fa-check"></i><b>13.1</b> Vector</a></li>
+<li class="chapter" data-level="13.2" data-path="eigen_basic.html"><a href="eigen_basic.html#matrix"><i class="fa fa-check"></i><b>13.2</b> Matrix</a></li>
 </ul></li>
 <li class="part"><span><b>III RcppArmadillo</b></span></li>
-<li class="chapter" data-level="13" data-path="arma_basic.html"><a href="arma_basic.html"><i class="fa fa-check"></i><b>13</b> Armadillo 자료형</a>
+<li class="chapter" data-level="14" data-path="arma_basic.html"><a href="arma_basic.html"><i class="fa fa-check"></i><b>14</b> Armadillo 자료형</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="arma_basic.html"><a href="arma_basic.html#vector-1"><i class="fa fa-check"></i><b>13.1</b> Vector</a></li>
-<li class="chapter" data-level="13.2" data-path="arma_basic.html"><a href="arma_basic.html#matrix-1"><i class="fa fa-check"></i><b>13.2</b> Matrix</a></li>
+<li class="chapter" data-level="14.1" data-path="arma_basic.html"><a href="arma_basic.html#vector-1"><i class="fa fa-check"></i><b>14.1</b> Vector</a></li>
+<li class="chapter" data-level="14.2" data-path="arma_basic.html"><a href="arma_basic.html#matrix-1"><i class="fa fa-check"></i><b>14.2</b> Matrix</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -287,29 +296,29 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Rcpp 튜토리얼</h1>
 <p class="author"><em>김현성</em></p>
-<p class="date"><em>2022-02-11</em></p>
+<p class="date"><em>2024-05-03</em></p>
 </div>
-<div id="들어가며" class="section level1 unnumbered">
-<h1>들어가며</h1>
+<div id="들어가며" class="section level1 unnumbered hasAnchor">
+<h1>들어가며<a href="index.html#들어가며" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>R은 통계를 전공하는 사람들이 가장 많이 사용하는 계산 언어 중 하나이다.
 R을 사용함에 있어 가장 답답한 부분 중 하나는 반복문(for문, while문)이 매우 매우 느리다는 것이다.
 이러한 문제를 해결하는 방법 중 하나는 컴파일 언어인 C/C++ 또는 Fortran을 이용하는 것이지만, 이를 단기간에 배우는 것은 쉽지 않다.</p>
-<p>R에는 컴파일 언어인 C/C++을 사용하기 편리하도록 만들어진 <code>Rcpp</code>이라는 패키지가 있다. (<span class="citation"><a href="#ref-R-Rcpp" role="doc-biblioref">Eddelbuettel, Francois, Allaire, et al.</a> (<a href="#ref-R-Rcpp" role="doc-biblioref">2022</a>)</span>)
-또한 C++에서 선형대수 라이브러리인 Eigen, Armadillo 또한 사용할 수 있도록 각각 <code>RcppEigen</code> (<span class="citation"><a href="#ref-R-RcppEigen" role="doc-biblioref">Bates et al.</a> (<a href="#ref-R-RcppEigen" role="doc-biblioref">2020</a>)</span>), <code>RcppArmadillo</code> (<span class="citation"><a href="#ref-R-RcppArmadillo" role="doc-biblioref">Eddelbuettel, Francois, Bates, et al.</a> (<a href="#ref-R-RcppArmadillo" role="doc-biblioref">2022</a>)</span>)를 제공하고 있다.</p>
+<p>R에는 컴파일 언어인 C/C++을 사용하기 편리하도록 만들어진 <code>Rcpp</code>이라는 패키지가 있다. (<span class="citation">Eddelbuettel, Francois, Allaire, et al. (<a href="#ref-R-Rcpp">2024</a>)</span>)
+또한 C++에서 선형대수 라이브러리인 Eigen, Armadillo 또한 사용할 수 있도록 각각 <code>RcppEigen</code> (<span class="citation">Bates et al. (<a href="#ref-R-RcppEigen">2024</a>)</span>), <code>RcppArmadillo</code> (<span class="citation">Eddelbuettel, Francois, Bates, et al. (<a href="#ref-R-RcppArmadillo">2024</a>)</span>)를 제공하고 있다.</p>
 <p>여기서는 R 사용자를 위한 기본적인 <strong>Rcpp</strong> 사용법과 선형대수 연산을 위한 <strong>RcppEigen</strong>, <strong>RcppArmadillo</strong>의 사용법에 대해 정리한다.
 필자 또한 C++을 전문적으로 배운 경험은 없으며, R 프로그래밍을 하며 연산속도 향상을 위해 부분적으로 C++을 사용하는 방법 위주로 정리해보려 한다.</p>
 
 </div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-R-RcppEigen" class="csl-entry">
-Bates, Douglas, Dirk Eddelbuettel, Romain Francois, and Yixuan Qiu; the authors of Eigen for the included version of Eigen. 2020. <em>RcppEigen: Rcpp Integration for the Eigen Templated Linear Algebra Library</em>. <a href="http://dirk.eddelbuettel.com/code/rcpp.eigen.html">http://dirk.eddelbuettel.com/code/rcpp.eigen.html</a>.
+Bates, Douglas, Dirk Eddelbuettel, Romain Francois, and Yixuan Qiu; the authors of Eigen for the included version of Eigen. 2024. <em>RcppEigen: Rcpp Integration for the Eigen Templated Linear Algebra Library</em>. <a href="https://github.com/RcppCore/RcppEigen">https://github.com/RcppCore/RcppEigen</a>.
 </div>
 <div id="ref-R-Rcpp" class="csl-entry">
-Eddelbuettel, Dirk, Romain Francois, JJ Allaire, Kevin Ushey, Qiang Kou, Nathan Russell, Inaki Ucar, Douglas Bates, and John Chambers. 2022. <em>Rcpp: Seamless r and c++ Integration</em>. <a href="https://CRAN.R-project.org/package=Rcpp">https://CRAN.R-project.org/package=Rcpp</a>.
+Eddelbuettel, Dirk, Romain Francois, JJ Allaire, Kevin Ushey, Qiang Kou, Nathan Russell, Inaki Ucar, Douglas Bates, and John Chambers. 2024. <em>Rcpp: Seamless r and c++ Integration</em>. <a href="https://www.rcpp.org">https://www.rcpp.org</a>.
 </div>
 <div id="ref-R-RcppArmadillo" class="csl-entry">
-Eddelbuettel, Dirk, Romain Francois, Doug Bates, Binxiang Ni, and Conrad Sanderson. 2022. <em>RcppArmadillo: Rcpp Integration for the Armadillo Templated Linear Algebra Library</em>. <a href="https://CRAN.R-project.org/package=RcppArmadillo">https://CRAN.R-project.org/package=RcppArmadillo</a>.
+Eddelbuettel, Dirk, Romain Francois, Doug Bates, Binxiang Ni, and Conrad Sanderson. 2024. <em>RcppArmadillo: Rcpp Integration for the Armadillo Templated Linear Algebra Library</em>. <a href="https://github.com/RcppCore/RcppArmadillo">https://github.com/RcppCore/RcppArmadillo</a>.
 </div>
 </div>
             </section>
