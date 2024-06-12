@@ -56,8 +56,11 @@ rcpp_use_header
 header-파일
 main-함수
 eigen_basic
+eigen_structure
 vector
 matrix
 arma_basic
+mac에서-오류-발생-시
+arma_datatype
 vector-1
 matrix-1

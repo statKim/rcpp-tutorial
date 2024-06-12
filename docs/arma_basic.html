@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 14 Armadillo 자료형 | Rcpp 튜토리얼</title>
+  <title>Chapter 15 Armadillo 불러오기 | Rcpp 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 14 Armadillo 자료형 | Rcpp 튜토리얼" />
+  <meta property="og:title" content="Chapter 15 Armadillo 불러오기 | Rcpp 튜토리얼" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="C++로 R 연산속도 높이기" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 14 Armadillo 자료형 | Rcpp 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 15 Armadillo 불러오기 | Rcpp 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -23,15 +23,15 @@
 <meta name="author" content="김현성" />
 
 
-<meta name="date" content="2024-05-03" />
+<meta name="date" content="2024-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="eigen_basic.html"/>
-<link rel="next" href="references.html"/>
+<link rel="prev" href="eigen_structure.html"/>
+<link rel="next" href="arma_datatype.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -261,16 +261,21 @@ div.csl-indent {
 <li class="chapter" data-level="12.2" data-path="rcpp_use_header.html"><a href="rcpp_use_header.html#main-함수"><i class="fa fa-check"></i><b>12.2</b> main 함수</a></li>
 </ul></li>
 <li class="part"><span><b>II RcppEigen</b></span></li>
-<li class="chapter" data-level="13" data-path="eigen_basic.html"><a href="eigen_basic.html"><i class="fa fa-check"></i><b>13</b> Eigen 자료형</a>
+<li class="chapter" data-level="13" data-path="eigen_basic.html"><a href="eigen_basic.html"><i class="fa fa-check"></i><b>13</b> Eigen 불러오기</a></li>
+<li class="chapter" data-level="14" data-path="eigen_structure.html"><a href="eigen_structure.html"><i class="fa fa-check"></i><b>14</b> Eigen 자료형</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="eigen_basic.html"><a href="eigen_basic.html#vector"><i class="fa fa-check"></i><b>13.1</b> Vector</a></li>
-<li class="chapter" data-level="13.2" data-path="eigen_basic.html"><a href="eigen_basic.html#matrix"><i class="fa fa-check"></i><b>13.2</b> Matrix</a></li>
+<li class="chapter" data-level="14.1" data-path="eigen_structure.html"><a href="eigen_structure.html#vector"><i class="fa fa-check"></i><b>14.1</b> Vector</a></li>
+<li class="chapter" data-level="14.2" data-path="eigen_structure.html"><a href="eigen_structure.html#matrix"><i class="fa fa-check"></i><b>14.2</b> Matrix</a></li>
 </ul></li>
 <li class="part"><span><b>III RcppArmadillo</b></span></li>
-<li class="chapter" data-level="14" data-path="arma_basic.html"><a href="arma_basic.html"><i class="fa fa-check"></i><b>14</b> Armadillo 자료형</a>
+<li class="chapter" data-level="15" data-path="arma_basic.html"><a href="arma_basic.html"><i class="fa fa-check"></i><b>15</b> Armadillo 불러오기</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="arma_basic.html"><a href="arma_basic.html#vector-1"><i class="fa fa-check"></i><b>14.1</b> Vector</a></li>
-<li class="chapter" data-level="14.2" data-path="arma_basic.html"><a href="arma_basic.html#matrix-1"><i class="fa fa-check"></i><b>14.2</b> Matrix</a></li>
+<li class="chapter" data-level="15.1" data-path="arma_basic.html"><a href="arma_basic.html#mac에서-오류-발생-시"><i class="fa fa-check"></i><b>15.1</b> Mac에서 오류 발생 시</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="arma_datatype.html"><a href="arma_datatype.html"><i class="fa fa-check"></i><b>16</b> Armadillo 자료형</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="arma_datatype.html"><a href="arma_datatype.html#vector-1"><i class="fa fa-check"></i><b>16.1</b> Vector</a></li>
+<li class="chapter" data-level="16.2" data-path="arma_datatype.html"><a href="arma_datatype.html#matrix-1"><i class="fa fa-check"></i><b>16.2</b> Matrix</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -293,13 +298,27 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="arma_basic" class="section level1 hasAnchor" number="14">
-<h1><span class="header-section-number">Chapter 14</span> Armadillo 자료형<a href="arma_basic.html#arma_basic" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="vector-1" class="section level2 hasAnchor" number="14.1">
-<h2><span class="header-section-number">14.1</span> Vector<a href="arma_basic.html#vector-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="matrix-1" class="section level2 hasAnchor" number="14.2">
-<h2><span class="header-section-number">14.2</span> Matrix<a href="arma_basic.html#matrix-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="arma_basic" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Armadillo 불러오기<a href="arma_basic.html#arma_basic" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>R에서 <code>install.package("RcppArmadillo")</code>으로 <code>RcppArmadillo</code>을 설치하고, C++ 파일에서 <code>Armadillo</code>을 사용할 떄에는 다음과 같이 불러올 수 있다.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb32-1"><a href="arma_basic.html#cb32-1" tabindex="-1"></a><span class="co">//[[Rcpp::depends(RcppArmadillo)]]</span></span>
+<span id="cb32-2"><a href="arma_basic.html#cb32-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;RcppArmadillo.h&gt;</span></span></code></pre></div>
+<p>참고로 <code>RcppArmadillo</code>을 불러오면 자동으로 <code>Rcpp</code>까지 불러오기 떄문에 따로 <code>#include &lt;Rcpp.h&gt;</code>를 추가할 필요는 없다. (오히려 <code>Rcpp</code>을 추가로 불러오게 되면 에러가 발생한다!)</p>
+<div id="mac에서-오류-발생-시" class="section level2 hasAnchor" number="15.1">
+<h2><span class="header-section-number">15.1</span> Mac에서 오류 발생 시<a href="arma_basic.html#mac에서-오류-발생-시" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Mac에서 <code>RcppArmadillo</code>를 사용하여 C++ 코드를 컴파일 했을 때, 아래의 오류가 발생할 수 있다.</p>
+<pre><code>library not found for -lgfortran</code></pre>
+<p>이는 Fortran 라이브러리 경로를 찾지 못했을 때 발생하며, 환경변수를 설정하여 해결할 수 있다.</p>
+<p>터미널에서 아래 코드로 <code>gfortran</code>이 설치되어 있으면 다음으로 넘어가고,</p>
+<pre><code>gfortran --version</code></pre>
+<p>설치가 되어있지 않을 경우에는 아래 명령어로 <code>gfortran</code>을 설치해준다.</p>
+<pre><code>brew install gfortran</code></pre>
+<p>다음으로 “~/.R/Makevars” 파일을 생성해주고</p>
+<pre><code>mkdir -p ~/.R
+touch ~/.R/Makevars</code></pre>
+<p>“~/.R/Makevars” 파일을 열어 아래의 내용을 추가한 후 저장한다.</p>
+<pre><code>FLIBS = -L/usr/local/opt/gcc/lib/gcc/current -lgfortran -lquadmath -lm</code></pre>
+<p>이상이 없다면 R을 종료하고 다시 실행하게 되면 에러가 발생하지 않을 것이다.</p>
 
 </div>
 </div>
@@ -308,8 +327,8 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="eigen_basic.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="eigen_structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="arma_datatype.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

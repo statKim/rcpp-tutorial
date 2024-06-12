@@ -1,8 +1,12 @@
 # (PART) RcppEigen {-}
 
-# Eigen 자료형 {#eigen_basic}
+# Eigen 불러오기 {#eigen_basic}
 
-## Vector
+R에서 `install.package("RcppEigen")`으로 `RcppEigen`을 설치하고, C++ 파일에서 `Eigen`을 사용할 떄에는 다음과 같이 불러올 수 있다.
 
+```cpp
+//[[Rcpp::depends(RcppEigen)]]
+#include <RcppEigen.h>
+```
 
-## Matrix
+참고로 `RcppEigen`을 불러오면 자동으로 `Rcpp`까지 불러오기 떄문에 따로 `#include <Rcpp.h>`를 추가할 필요는 없다.
