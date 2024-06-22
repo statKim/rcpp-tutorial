@@ -1,6 +1,6 @@
 # Eigen 자료형 {#eigen_datatype}
 
-설명의 편의를 위해 `using namespace RcppEigen;`를 선언했다고 가정하자. (즉, `RcppEigen::` 부분을 생략한다는 의미이다.)
+설명의 편의를 위해 `using namespace Eigen;`를 선언했다고 가정하자. (즉, `Eigen::` 부분을 생략한다는 의미이다.)
 
 ## Vector
 
