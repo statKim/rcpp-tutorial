@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 Eigen 불러오기 | Rcpp 튜토리얼</title>
+  <title>Chapter 15 Eigen Matrix 연산 | Rcpp 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 Eigen 불러오기 | Rcpp 튜토리얼" />
+  <meta property="og:title" content="Chapter 15 Eigen Matrix 연산 | Rcpp 튜토리얼" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="C++로 R 연산속도 높이기" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 Eigen 불러오기 | Rcpp 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 15 Eigen Matrix 연산 | Rcpp 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rcpp_use_header.html"/>
-<link rel="next" href="eigen_datatype.html"/>
+<link rel="prev" href="eigen_datatype.html"/>
+<link rel="next" href="arma_basic.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -317,21 +317,79 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="eigen_basic" class="section level1 hasAnchor" number="13">
-<h1><span class="header-section-number">Chapter 13</span> Eigen 불러오기<a href="eigen_basic.html#eigen_basic" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>R에서 <code>install.package("RcppEigen")</code>으로 <code>RcppEigen</code>을 설치하고, C++ 파일에서 <code>Eigen</code>을 사용할 떄에는 다음과 같이 불러올 수 있다.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="eigen_basic.html#cb31-1" tabindex="-1"></a><span class="co">//[[Rcpp::depends(RcppEigen)]]</span></span>
-<span id="cb31-2"><a href="eigen_basic.html#cb31-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;RcppEigen.h&gt;</span></span></code></pre></div>
-<p>참고로 <code>RcppEigen</code>을 불러오면 자동으로 <code>Rcpp</code>까지 불러오기 떄문에 따로 <code>#include &lt;Rcpp.h&gt;</code>를 추가할 필요는 없다.</p>
+<div id="eigen_operation" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Eigen Matrix 연산<a href="eigen_operation.html#eigen_operation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>다음의 변수들이 정의되어 있다고 하자.</p>
+<ul>
+<li>A: <span class="math inline">\(n \times p\)</span> 인 <code>Eigen::MatrixXd</code></li>
+<li>B: <span class="math inline">\(p \times q\)</span> 인 <code>Eigen::MatrixXd</code></li>
+<li>v: <span class="math inline">\(p\)</span>차원 <code>Eigen::VectorXd</code></li>
+<li>w: <span class="math inline">\(p\)</span>차원 <code>Eigen::VectorXd</code></li>
+</ul>
+<div id="matrix-덧셈-뺄셈" class="section level2 hasAnchor" number="15.1">
+<h2><span class="header-section-number">15.1</span> Matrix 덧셈, 뺄셈<a href="eigen_operation.html#matrix-덧셈-뺄셈" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="eigen_operation.html#cb37-1" tabindex="-1"></a><span class="co">// A + A</span></span>
+<span id="cb37-2"><a href="eigen_operation.html#cb37-2" tabindex="-1"></a>A <span class="op">+</span> A</span>
+<span id="cb37-3"><a href="eigen_operation.html#cb37-3" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="eigen_operation.html#cb37-4" tabindex="-1"></a><span class="co">// A - A</span></span>
+<span id="cb37-5"><a href="eigen_operation.html#cb37-5" tabindex="-1"></a>A <span class="op">-</span> A</span></code></pre></div>
+</div>
+<div id="스칼라-곱셈-나눗셈" class="section level2 hasAnchor" number="15.2">
+<h2><span class="header-section-number">15.2</span> 스칼라 곱셈, 나눗셈<a href="eigen_operation.html#스칼라-곱셈-나눗셈" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="eigen_operation.html#cb38-1" tabindex="-1"></a><span class="co">// 3 * A (scalar x matrix)</span></span>
+<span id="cb38-2"><a href="eigen_operation.html#cb38-2" tabindex="-1"></a><span class="dv">3</span> <span class="op">*</span> A</span>
+<span id="cb38-3"><a href="eigen_operation.html#cb38-3" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="eigen_operation.html#cb38-4" tabindex="-1"></a><span class="co">// A / 2 (matrix / scalar)</span></span>
+<span id="cb38-5"><a href="eigen_operation.html#cb38-5" tabindex="-1"></a>A <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb38-6"><a href="eigen_operation.html#cb38-6" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="eigen_operation.html#cb38-7" tabindex="-1"></a><span class="co">// 2 * v (scalar x vector)</span></span>
+<span id="cb38-8"><a href="eigen_operation.html#cb38-8" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> v</span></code></pre></div>
+</div>
+<div id="matrix-곱셈" class="section level2 hasAnchor" number="15.3">
+<h2><span class="header-section-number">15.3</span> Matrix 곱셈<a href="eigen_operation.html#matrix-곱셈" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb39-1"><a href="eigen_operation.html#cb39-1" tabindex="-1"></a><span class="co">// A %*% B (matrix %*% matrix)</span></span>
+<span id="cb39-2"><a href="eigen_operation.html#cb39-2" tabindex="-1"></a>A <span class="op">*</span> B</span>
+<span id="cb39-3"><a href="eigen_operation.html#cb39-3" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="eigen_operation.html#cb39-4" tabindex="-1"></a><span class="co">// A %*% v (matrix %*% vector)</span></span>
+<span id="cb39-5"><a href="eigen_operation.html#cb39-5" tabindex="-1"></a>A <span class="op">*</span> v</span></code></pre></div>
+</div>
+<div id="내적-외적" class="section level2 hasAnchor" number="15.4">
+<h2><span class="header-section-number">15.4</span> 내적, 외적<a href="eigen_operation.html#내적-외적" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb40"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb40-1"><a href="eigen_operation.html#cb40-1" tabindex="-1"></a><span class="co">// 내적(dot product)</span></span>
+<span id="cb40-2"><a href="eigen_operation.html#cb40-2" tabindex="-1"></a>v<span class="op">.</span>dot<span class="op">(</span>w<span class="op">)</span></span>
+<span id="cb40-3"><a href="eigen_operation.html#cb40-3" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="eigen_operation.html#cb40-4" tabindex="-1"></a><span class="co">// 외적(cross product)</span></span>
+<span id="cb40-5"><a href="eigen_operation.html#cb40-5" tabindex="-1"></a>v<span class="op">.</span>cross<span class="op">(</span>w<span class="op">)</span></span></code></pre></div>
+</div>
+<div id="elementwise-연산" class="section level2 hasAnchor" number="15.5">
+<h2><span class="header-section-number">15.5</span> Elementwise 연산<a href="eigen_operation.html#elementwise-연산" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Matrix의 elementwise 연산은 <code>.array()</code> method로 할 수 있다.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb41-1"><a href="eigen_operation.html#cb41-1" tabindex="-1"></a><span class="co">// A + 1 (matrix A의 elementwise 곱셈)</span></span>
+<span id="cb41-2"><a href="eigen_operation.html#cb41-2" tabindex="-1"></a>A<span class="op">.</span>array<span class="op">()</span> <span class="op">*</span> <span class="dv">1</span></span>
+<span id="cb41-3"><a href="eigen_operation.html#cb41-3" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="eigen_operation.html#cb41-4" tabindex="-1"></a><span class="co">// A * A (matrix A의 elementwise 곱셈)</span></span>
+<span id="cb41-5"><a href="eigen_operation.html#cb41-5" tabindex="-1"></a>A<span class="op">.</span>array<span class="op">()</span> <span class="op">*</span> A<span class="op">.</span>array<span class="op">()</span></span></code></pre></div>
+</div>
+<div id="연산-관련-함수들" class="section level2 hasAnchor" number="15.6">
+<h2><span class="header-section-number">15.6</span> 연산 관련 함수들<a href="eigen_operation.html#연산-관련-함수들" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb42"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb42-1"><a href="eigen_operation.html#cb42-1" tabindex="-1"></a><span class="co">// matrix A의 모든 원소의 합</span></span>
+<span id="cb42-2"><a href="eigen_operation.html#cb42-2" tabindex="-1"></a>A<span class="op">.</span>sum<span class="op">()</span></span>
+<span id="cb42-3"><a href="eigen_operation.html#cb42-3" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="eigen_operation.html#cb42-4" tabindex="-1"></a><span class="co">// trace of A</span></span>
+<span id="cb42-5"><a href="eigen_operation.html#cb42-5" tabindex="-1"></a>A<span class="op">.</span>trace<span class="op">()</span></span></code></pre></div>
 
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="rcpp_use_header.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eigen_datatype.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="eigen_datatype.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="arma_basic.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

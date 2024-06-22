@@ -1,0 +1,79 @@
+# Eigen Matrix 연산 {#eigen_operation}
+
+
+다음의 변수들이 정의되어 있다고 하자.
+
+- A: $n \times p$ 인 `Eigen::MatrixXd`
+- B: $p \times q$ 인 `Eigen::MatrixXd`
+- v: $p$차원 `Eigen::VectorXd`
+- w: $p$차원 `Eigen::VectorXd`
+
+
+## Matrix 덧셈, 뺄셈
+
+```cpp
+// A + A
+A + A
+
+// A - A
+A - A
+```
+
+## 스칼라 곱셈, 나눗셈
+
+```cpp
+// 3 * A (scalar x matrix)
+3 * A
+
+// A / 2 (matrix / scalar)
+A / 2
+
+// 2 * v (scalar x vector)
+2 * v
+```
+
+
+## Matrix 곱셈
+
+```cpp
+// A %*% B (matrix %*% matrix)
+A * B
+
+// A %*% v (matrix %*% vector)
+A * v
+```
+
+
+## 내적, 외적
+```cpp
+// 내적(dot product)
+v.dot(w)
+
+// 외적(cross product)
+v.cross(w)
+```
+
+
+## Elementwise 연산
+Matrix의 elementwise 연산은 `.array()` method로 할 수 있다.
+
+```cpp
+// A + 1 (matrix A의 elementwise 곱셈)
+A.array() * 1
+
+// A * A (matrix A의 elementwise 곱셈)
+A.array() * A.array()
+```
+
+
+
+## 연산 관련 함수들
+```cpp
+// matrix A의 모든 원소의 합
+A.sum()
+
+// trace of A
+A.trace()
+```
+
+

@@ -1,6 +1,107 @@
-# Eigen 자료형 {#eigen_structure}
+# Eigen 자료형 {#eigen_datatype}
+
+설명의 편의를 위해 `using namespace RcppEigen;`를 선언했다고 가정하자. (즉, `RcppEigen::` 부분을 생략한다는 의미이다.)
 
 ## Vector
 
+### Vector 선언
+다음과 같이 여러 방법으로 Vector를 생성할 수 있다.
+여기서는 `VectorXd`를 이용해서 double type의 값을 가지는 vector를 생성했다. (여기서 `X`는 동적(dynamic) 크기를 할당한다는 의미이며, `d`는 double 형 값을 가진다는 의미이다.)
+이외에도 `VectorXf`(float type의 동적 vector), `VectorXi`(integer type의 동적 vector)와 같은 방식으로 사용이 가능하다.
+```cpp
+// 값을 지정하지 않고 자료형과 변수만 선언
+VectorXd a;
+
+// a <- rep(0, 3)
+VectorXd a(3);
+
+// a <- c(1,2,3)
+// 값을 바로 지정하면서 vector를 생성할 때에는 vector의 크기도 명확히 지정해주어야 한다.
+Vector3d a(1, 2, 3); 
+```
+
+### Vector 값 접근
+Vector의 인덱싱은 다음과 같이 할 수 있다.
+```cpp
+VectorXd a(3);
+
+// Rcpp과 달리 [] 대신 () 를 이용해서 indexing
+a(0) = 3;
+a(1) = 4;
+a(2) = 5;
+// a = [3, 4, 5] 인 vector
+```
+
+슬라이싱은 `seq()` 또는 `seqN()`을 이용해서 할 수 있다.
+여기서 `a = [1, 2, 3, ..., 9]`인 vector라 하자.
+
+```cpp
+// seq(start_idx, end_idx)
+a(seq(2, 5))
+// Output: 3 4 5 6
+
+// seq(start_idx, end_idx, 간격)
+a(seq(2, 6, 2))
+// Output: 3 5 7
+
+// seqN(start_idx, size)
+a(seqN(2, 3))
+// Output: 3 4 5
+
+// seqN(start_idx, size, 간격)
+a(seqN(2, 3, 2))
+// Output: 3 5 7
+
+```
+
+
+### Vector 관련 함수
+`a`라는 Vector 타입의 변수가 있다고 가정하자.
+
+- `a.size()`: `a`의 길이 반환
+
+
+------
 
 ## Matrix
+
+
+### Matrix 선언
+```cpp
+// 값을 지정하지 않고 자료형과 변수만 선언
+MatrixXd A;
+
+// A1 <- matrix(0, nrow = 2, ncol = 3)
+MatrixXd A1(2, 3);
+```
+
+### Matrix 값 접근
+```cpp
+MatrixXd A(5, 5);
+
+// A[2, 3]
+double a11 = A(1, 2);
+
+// A[1, ]
+VectorXd row1 = A.row(0);
+
+// A[, 2]
+VectorXd col1 = A.col(1);
+
+// A[1:2, 3:4]
+MatrixXd B = A(seq(0, 1), seq(2, 3));
+```
+
+### Matrix 관련 함수
+`A`라는 Matrix 타입의 변수가 있다고 가정하자.
+
+- `A.rows()`: `A`의 행 개수 반환
+
+- `A.cols()`: `A`의 열 개수 반환
+
+- `A.row(i)`: `A`의 i번쨰 행 반환 (return 타입은 Vector)
+
+- `A.col(j)`: `A`의 j번쨰 열 반환 (return 타입은 Vector)
+
+- `A.transpose()`: `A`를 transpose한 Matrix 반환 (return 타입은 Matrix)
+

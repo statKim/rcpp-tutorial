@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 Eigen 불러오기 | Rcpp 튜토리얼</title>
+  <title>Chapter 15 Eigen Matrix | Rcpp 튜토리얼</title>
   <meta name="description" content="C++로 R 연산속도 높이기" />
   <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 Eigen 불러오기 | Rcpp 튜토리얼" />
+  <meta property="og:title" content="Chapter 15 Eigen Matrix | Rcpp 튜토리얼" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="C++로 R 연산속도 높이기" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 Eigen 불러오기 | Rcpp 튜토리얼" />
+  <meta name="twitter:title" content="Chapter 15 Eigen Matrix | Rcpp 튜토리얼" />
   
   <meta name="twitter:description" content="C++로 R 연산속도 높이기" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="rcpp_use_header.html"/>
-<link rel="next" href="eigen_datatype.html"/>
+<link rel="prev" href="eigen_datatype.html"/>
+<link rel="next" href="arma_basic.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -277,14 +277,18 @@ div.csl-indent {
 <li class="chapter" data-level="14.2.3" data-path="eigen_datatype.html"><a href="eigen_datatype.html#matrix-관련-함수-1"><i class="fa fa-check"></i><b>14.2.3</b> Matrix 관련 함수</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="eigen_operation.html"><a href="eigen_operation.html"><i class="fa fa-check"></i><b>15</b> Eigen Matrix 연산</a>
+<li class="chapter" data-level="15" data-path="eigen_matrix.html"><a href="eigen_matrix.html"><i class="fa fa-check"></i><b>15</b> Eigen Matrix</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="eigen_operation.html"><a href="eigen_operation.html#matrix-덧셈-뺄셈"><i class="fa fa-check"></i><b>15.1</b> Matrix 덧셈, 뺄셈</a></li>
-<li class="chapter" data-level="15.2" data-path="eigen_operation.html"><a href="eigen_operation.html#스칼라-곱셈-나눗셈"><i class="fa fa-check"></i><b>15.2</b> 스칼라 곱셈, 나눗셈</a></li>
-<li class="chapter" data-level="15.3" data-path="eigen_operation.html"><a href="eigen_operation.html#matrix-곱셈"><i class="fa fa-check"></i><b>15.3</b> Matrix 곱셈</a></li>
-<li class="chapter" data-level="15.4" data-path="eigen_operation.html"><a href="eigen_operation.html#내적-외적"><i class="fa fa-check"></i><b>15.4</b> 내적, 외적</a></li>
-<li class="chapter" data-level="15.5" data-path="eigen_operation.html"><a href="eigen_operation.html#elementwise-연산"><i class="fa fa-check"></i><b>15.5</b> Elementwise 연산</a></li>
-<li class="chapter" data-level="15.6" data-path="eigen_operation.html"><a href="eigen_operation.html#연산-관련-함수들"><i class="fa fa-check"></i><b>15.6</b> 연산 관련 함수들</a></li>
+<li class="chapter" data-level="15.1" data-path="eigen_matrix.html"><a href="eigen_matrix.html#matrix-선언-2"><i class="fa fa-check"></i><b>15.1</b> Matrix 선언</a></li>
+<li class="chapter" data-level="15.2" data-path="eigen_matrix.html"><a href="eigen_matrix.html#matrix-값-접근-2"><i class="fa fa-check"></i><b>15.2</b> Matrix 값 접근</a></li>
+<li class="chapter" data-level="15.3" data-path="eigen_matrix.html"><a href="eigen_matrix.html#matrix-관련-함수-2"><i class="fa fa-check"></i><b>15.3</b> Matrix 관련 함수</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="eigen_matrix.html"><a href="eigen_matrix.html#a.rows"><i class="fa fa-check"></i><b>15.3.1</b> <code>A.rows()</code></a></li>
+<li class="chapter" data-level="15.3.2" data-path="eigen_matrix.html"><a href="eigen_matrix.html#a.cols"><i class="fa fa-check"></i><b>15.3.2</b> <code>A.cols()</code></a></li>
+<li class="chapter" data-level="15.3.3" data-path="eigen_matrix.html"><a href="eigen_matrix.html#a.rowi-1"><i class="fa fa-check"></i><b>15.3.3</b> <code>A.row(i)</code></a></li>
+<li class="chapter" data-level="15.3.4" data-path="eigen_matrix.html"><a href="eigen_matrix.html#a.colj-1"><i class="fa fa-check"></i><b>15.3.4</b> <code>A.col(j)</code></a></li>
+<li class="chapter" data-level="15.3.5" data-path="eigen_matrix.html"><a href="eigen_matrix.html#transposea-1"><i class="fa fa-check"></i><b>15.3.5</b> <code>transpose(A)</code></a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>III RcppArmadillo</b></span></li>
 <li class="chapter" data-level="16" data-path="arma_basic.html"><a href="arma_basic.html"><i class="fa fa-check"></i><b>16</b> Armadillo 불러오기</a>
@@ -317,21 +321,68 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="eigen_basic" class="section level1 hasAnchor" number="13">
-<h1><span class="header-section-number">Chapter 13</span> Eigen 불러오기<a href="eigen_basic.html#eigen_basic" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>R에서 <code>install.package("RcppEigen")</code>으로 <code>RcppEigen</code>을 설치하고, C++ 파일에서 <code>Eigen</code>을 사용할 떄에는 다음과 같이 불러올 수 있다.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb31-1"><a href="eigen_basic.html#cb31-1" tabindex="-1"></a><span class="co">//[[Rcpp::depends(RcppEigen)]]</span></span>
-<span id="cb31-2"><a href="eigen_basic.html#cb31-2" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;RcppEigen.h&gt;</span></span></code></pre></div>
-<p>참고로 <code>RcppEigen</code>을 불러오면 자동으로 <code>Rcpp</code>까지 불러오기 떄문에 따로 <code>#include &lt;Rcpp.h&gt;</code>를 추가할 필요는 없다.</p>
+<div id="eigen_matrix" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">Chapter 15</span> Eigen Matrix<a href="eigen_matrix.html#eigen_matrix" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="matrix-선언-2" class="section level2 hasAnchor" number="15.1">
+<h2><span class="header-section-number">15.1</span> Matrix 선언<a href="eigen_matrix.html#matrix-선언-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb37-1"><a href="eigen_matrix.html#cb37-1" tabindex="-1"></a><span class="co">// 값을 지정하지 않고 자료형과 변수만 선언</span></span>
+<span id="cb37-2"><a href="eigen_matrix.html#cb37-2" tabindex="-1"></a>MatrixXd A<span class="op">;</span></span>
+<span id="cb37-3"><a href="eigen_matrix.html#cb37-3" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="eigen_matrix.html#cb37-4" tabindex="-1"></a><span class="co">// A1 &lt;- matrix(0, nrow = 2, ncol = 3)</span></span>
+<span id="cb37-5"><a href="eigen_matrix.html#cb37-5" tabindex="-1"></a>MatrixXd A1<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">);</span></span></code></pre></div>
+</div>
+<div id="matrix-값-접근-2" class="section level2 hasAnchor" number="15.2">
+<h2><span class="header-section-number">15.2</span> Matrix 값 접근<a href="eigen_matrix.html#matrix-값-접근-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb38-1"><a href="eigen_matrix.html#cb38-1" tabindex="-1"></a>MatrixXd A<span class="op">(</span><span class="dv">5</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span>
+<span id="cb38-2"><a href="eigen_matrix.html#cb38-2" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="eigen_matrix.html#cb38-3" tabindex="-1"></a><span class="co">// A[2, 3]</span></span>
+<span id="cb38-4"><a href="eigen_matrix.html#cb38-4" tabindex="-1"></a><span class="dt">double</span> a11 <span class="op">=</span> A<span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb38-5"><a href="eigen_matrix.html#cb38-5" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="eigen_matrix.html#cb38-6" tabindex="-1"></a><span class="co">// A[1, ]</span></span>
+<span id="cb38-7"><a href="eigen_matrix.html#cb38-7" tabindex="-1"></a>VectorXd row1 <span class="op">=</span> A<span class="op">.</span>row<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb38-8"><a href="eigen_matrix.html#cb38-8" tabindex="-1"></a></span>
+<span id="cb38-9"><a href="eigen_matrix.html#cb38-9" tabindex="-1"></a><span class="co">// A[, 2]</span></span>
+<span id="cb38-10"><a href="eigen_matrix.html#cb38-10" tabindex="-1"></a>VectorXd col1 <span class="op">=</span> A<span class="op">.</span>col<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb38-11"><a href="eigen_matrix.html#cb38-11" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="eigen_matrix.html#cb38-12" tabindex="-1"></a><span class="co">// A[1:2, 3:4]</span></span>
+<span id="cb38-13"><a href="eigen_matrix.html#cb38-13" tabindex="-1"></a>MatrixXd B <span class="op">=</span> A<span class="op">(</span>seq<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">),</span> seq<span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">));</span></span></code></pre></div>
+</div>
+<div id="matrix-관련-함수-2" class="section level2 hasAnchor" number="15.3">
+<h2><span class="header-section-number">15.3</span> Matrix 관련 함수<a href="eigen_matrix.html#matrix-관련-함수-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>A</code>라는 Matrix 타입의 변수가 있다고 가정하자.</p>
+<div id="a.rows" class="section level3 hasAnchor" number="15.3.1">
+<h3><span class="header-section-number">15.3.1</span> <code>A.rows()</code><a href="eigen_matrix.html#a.rows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrix <code>A</code>의 행 개수 반환</p>
+</div>
+<div id="a.cols" class="section level3 hasAnchor" number="15.3.2">
+<h3><span class="header-section-number">15.3.2</span> <code>A.cols()</code><a href="eigen_matrix.html#a.cols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrix <code>A</code>의 열 개수 반환</p>
+</div>
+<div id="a.rowi-1" class="section level3 hasAnchor" number="15.3.3">
+<h3><span class="header-section-number">15.3.3</span> <code>A.row(i)</code><a href="eigen_matrix.html#a.rowi-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrix <code>A</code>의 i번쨰 행 반환 (return 타입은 Vector)</p>
+</div>
+<div id="a.colj-1" class="section level3 hasAnchor" number="15.3.4">
+<h3><span class="header-section-number">15.3.4</span> <code>A.col(j)</code><a href="eigen_matrix.html#a.colj-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrix <code>A</code>의 j번쨰 열 반환 (return 타입은 Vector)</p>
+</div>
+<div id="transposea-1" class="section level3 hasAnchor" number="15.3.5">
+<h3><span class="header-section-number">15.3.5</span> <code>transpose(A)</code><a href="eigen_matrix.html#transposea-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrix <code>A</code>를 transpose한 Matrix 반환 (return 타입은 Matrix)</p>
 
 </div>
+</div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="rcpp_use_header.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eigen_datatype.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="eigen_datatype.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="arma_basic.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -385,20 +436,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
